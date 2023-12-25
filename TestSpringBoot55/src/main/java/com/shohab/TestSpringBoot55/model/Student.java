@@ -20,9 +20,12 @@ public class Student {
     @Column(unique = true, nullable = false)
     private String email;
     private String gender;
-    private String department;
+    private String subject;
     private String hobby;
     private Date DOB;
+    @ManyToOne
+    @JoinColumn(name="dpe_id")
+    Department department;
 
 
 }
