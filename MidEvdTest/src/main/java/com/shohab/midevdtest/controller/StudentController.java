@@ -42,13 +42,12 @@ public class StudentController {
         return "redirect:/viewallstu";   
     } 
     
-    @RequestMapping("/deletestu/{id}")
-    public  String deleteStu(@PathVariable("sid") int id){
-        
+    @RequestMapping("/deletestu/{sid}")
+    public  String deleteStu(@PathVariable("sid") int id){        
         sd.deleteStu(id);
         return "redirect:/viewallstu";         
     }
-    @RequestMapping("/stueditform/{id}")
+    @RequestMapping("/stueditform/{sid}")
     public String stuEditForm(@PathVariable("sid") int id,Model m){
         Student student=sd.getStuById(id);
         m.addAttribute("student", student);
