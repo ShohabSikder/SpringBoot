@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin/user/")
 public class UserController {
 
     @Autowired
@@ -35,13 +35,13 @@ public class UserController {
         return "alluser";
     }
 
-    @RequestMapping("/saveform")
+    @RequestMapping("saveform")
     public String userSaveForm(Model m){
         m.addAttribute("user", new User());
         return  "saveuserform";
     }
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "save")
     public  String userSave(@ModelAttribute User user){
 
         BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
@@ -49,6 +49,7 @@ public class UserController {
         Role userRole=new Role(1);
         user.addRole(userRole);
         userRepo.save(user);
-        return "redirect:/user";
+
+        return "redirect:/admin/user/";
     }
 }

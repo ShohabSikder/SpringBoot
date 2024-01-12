@@ -38,7 +38,9 @@ public class User {
     private  boolean isEnable;
 
 
-    @ManyToMany
+    @ManyToMany(
+            fetch = FetchType.EAGER
+    )
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -55,4 +57,6 @@ public class User {
 
         this.roles.add(role);
     }
+
+
 }
