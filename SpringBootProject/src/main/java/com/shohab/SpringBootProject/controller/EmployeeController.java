@@ -40,7 +40,7 @@ public class EmployeeController {
         // to add department as dropdown from Department Model using Join Querry
         m.addAttribute("department",new Department());
         m.addAttribute("deplist",depList);
-        System.out.println(depList);
+
 
         //Student Part
         m.addAttribute("employee", new EmployeeModel());
@@ -61,10 +61,18 @@ public class EmployeeController {
 
     @RequestMapping("/edit/{id}")
     public String editEmployee(@PathVariable int id, Model m){
+        List<Department>depList=departmentService.getAllDepartment();
+        // to add department as dropdown from Department Model using Join Querry
+        m.addAttribute("department",new Department());
+        m.addAttribute("deplist",depList);
         EmployeeModel e=employeeService.findBy(id);
         m.addAttribute("employee", e);
         return "addemployee";
 
+    }
+    @GetMapping("/page1")
+    public String home(){
+        return "page1";
     }
 
 }

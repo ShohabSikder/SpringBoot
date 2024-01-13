@@ -26,6 +26,8 @@ public class EmployeeModel {
     private Date joiningDate;
     private String salary;
     private String gender;
-    private String department;
+    @ManyToOne
+    @JoinColumn(name = "depid")
+    private Department department;
 
 }

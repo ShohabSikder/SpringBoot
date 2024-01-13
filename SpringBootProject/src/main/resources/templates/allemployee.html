@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
@@ -33,7 +34,7 @@
         <td th:text="${employee.email}"></td>
         <td th:text="${employee.joiningDate}"></td>
         <td th:text="${employee.gender}"></td>
-        <td th:text="${employee.department}"></td>
+        <td th:text="${employee.department.name}"></td>
         <td th:text="${employee.salary}"></td>
         <td >
             <a class="btn btn-danger" th:href="@{'/employee/delete/'+${employee.id}}">

@@ -17,6 +17,8 @@ public class Attendance {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
+    private String department;
+    @Column(nullable = false)
     private String inTime;
     @Column(nullable = false)
     private String outTime;

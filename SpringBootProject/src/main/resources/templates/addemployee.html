@@ -1,5 +1,6 @@
 <div th:insert="~{header.html}"></div>
 <div th:insert="~{sidebar.html}"></div>
+
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
@@ -10,13 +11,12 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
 
 </head>
-<body style="height: 100%; display: flex; align-items: center; justify-content: center;">>
-
+<body>
 
 <div class="page-wrapper">
     <div class="content container-fluid">
         <div class="page-name mb-2">
-            <div class="container p-2 my-2 border mx-auto" style="max-width: 600px;">
+            <div class="container p-2 my-2 border mx-auto" >
 
                 <div class="container">
 
@@ -47,7 +47,7 @@
                         <div class="mb-3">
                             <label class="form-label">Department</label>
                             <select class="form-control" th:field="*{department}" type="text">
-                                <option th:each="d:${deplist}" th:text="${d.name}" th:value="${d.name}">Select One
+                                <option th:each="d:${deplist}" th:text="${d.name}" th:value="${d.id}">Select One
                                 </option>
                             </select>
 
