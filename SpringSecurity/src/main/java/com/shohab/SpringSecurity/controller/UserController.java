@@ -28,25 +28,25 @@ public class UserController {
     private IUser userRepo;
 
     @GetMapping("")
-    public String viewAllUser(Model m){
-        List<User> userList= userRepo.findAll();
+    public String viewAllUser(Model m) {
+        List<User> userList = userRepo.findAll();
         m.addAttribute("userList", userList);
 
         return "alluser";
     }
 
     @RequestMapping("saveform")
-    public String userSaveForm(Model m){
+    public String userSaveForm(Model m) {
         m.addAttribute("user", new User());
-        return  "saveuserform";
+        return "saveuserform";
     }
 
     @PostMapping(value = "save")
-    public  String userSave(@ModelAttribute User user){
+    public String userSave(@ModelAttribute User user) {
 
-        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        Role userRole=new Role(1);
+        Role userRole = new Role(1);
         user.addRole(userRole);
         userRepo.save(user);
 

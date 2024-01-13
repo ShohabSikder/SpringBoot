@@ -27,6 +27,12 @@ public class EmployeeController {
         m.addAttribute("title", "All Employee");
         return  "allemployee";
     }
+
+
+//    @GetMapping("/header")
+//    public String showHeader() {
+//        return "header.html";
+//    }
     @GetMapping("/addform")
     public  String addEmployee(Model m){
 // data comes from Department table using List, DepartmentService
