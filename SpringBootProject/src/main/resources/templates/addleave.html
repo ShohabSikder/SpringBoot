@@ -1,6 +1,5 @@
 <div th:insert="~{header.html}"></div>
 <div th:insert="~{sidebar.html}"></div>
-
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
@@ -21,15 +20,15 @@
 <body>
 
 
-<div class="content container-fluid align-content-center">
+<div class="content container-fluid ">
     <div class="page-name mb-2">
         <div class="container p-2 my-2 border mx-auto">
 
             <div class="container">
 
-                <h2 class="text-center bg-info p-2" th:if="${id==null}">Add Attendance</h2>
-                <h2 class="text-center bg-secondary p-2" th:if="${id!=null}">Update Attendance</h2>
-                <form method="post" th:action="@{/attendance/save}" th:object="${attendance}">
+                <h2 class="text-center bg-info p-2" th:if="${id==null}">Add Leave</h2>
+                <h2 class="text-center bg-secondary p-2" th:if="${id!=null}">Update Leave</h2>
+                <form method="post" th:action="@{/leave/save}" th:object="${leave}">
                     <input class="form-control" th:field="*{id}" type="hidden">
 
                     <div class="mb-3">
@@ -38,7 +37,6 @@
                             <option th:each="d:${employeeList}" th:text="${d.name}" th:value="${d.name}">Select One
                             </option>
                         </select>
-
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Department</label>
@@ -46,20 +44,27 @@
                             <option th:each="d:${deplist}" th:text="${d.name}" th:value="${d.name}">Select One
                             </option>
                         </select>
+                    </div>
 
+
+                    <div class="mb-3">
+                        <label class="form-label">Leave Date</label>
+                        <input class="form-control" th:field="*{leaveDate}" type="date">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">In time</label>
-                        <input class="form-control" th:field="*{inTime}" type="time">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" th:field="${comment}"></textarea>
+                            <label for="floatingTextarea2" th:text="#{label.comments}">Comments</label>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Out Time</label>
-                        <input class="form-control" th:field="*{outTime}" type="time">
+                        <select class="form-select" aria-label="Default select example" th:field="${leaveType}">
+                            <option th:value="null" th:text="#{label.openSelect}">Open this select menu</option>
+                            <option th:value="PaidLeave" th:text="#{label.paidLeave}">Paid Leave</option>
+                            <option th:value="UnPaidLeave" th:text="#{label.unpaidLeave}">UnPaid Leave</option>
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Date</label>
-                        <input class="form-control" th:field="*{date}" type="date">
-                    </div>
+
 
 
 

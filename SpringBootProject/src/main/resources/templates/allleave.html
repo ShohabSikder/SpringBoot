@@ -18,27 +18,27 @@
         <th>ID</th>
         <th>Name</th>
         <th>Department</th>
-        <th>In Time</th>
-        <th>Out Time</th>
-        <th>Date</th>
+        <th>Leave Type</th>
+        <th>Leave Date</th>
+        <th>Leave Reason</th>
         <th>Action</th>
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="attendance : ${attendanceList}">
-        <td th:text="${attendance.id}"></td>
-        <td th:text="${attendance.name}"></td>
-        <td th:text="${attendance.department}"></td>
-        <td th:text="${attendance.inTime}"></td>
-        <td th:text="${attendance.outTime}"></td>
-        <td th:text="${attendance.date}"></td>
+    <tr th:each="leave : ${leaveList}">
+        <td th:text="${leave.id}"></td>
+        <td th:text="${leave.name}"></td>
+        <td th:text="${leave.department}"></td>
+        <td th:text="${leave.leaveType}"></td>
+        <td th:text="${leave.leaveDate}"></td>
+        <td th:text="${leave.reason}"></td>
 
         <td>
-            <a class="btn btn-danger" th:href="@{'/attendance/delete/'+${attendance.id}}">
+            <a class="btn btn-danger" th:href="@{'/leave/delete/'+${leave.id}}">
                 Delete
             </a>
-            <a class="btn btn-warning" th:href="@{'/attendance/edit/'+${attendance.id}}">
+            <a class="btn btn-warning" th:href="@{'/leave/edit/'+${leave.id}}">
                 Update
             </a>
 

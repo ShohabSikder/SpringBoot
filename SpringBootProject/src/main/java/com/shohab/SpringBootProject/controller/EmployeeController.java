@@ -70,9 +70,9 @@ public class EmployeeController {
         return "addemployee";
 
     }
-    @GetMapping("/page1")
+    @GetMapping("/index")
     public String home(){
-        return "page1";
+        return "index";
     }
 
 }
