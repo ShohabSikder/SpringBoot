@@ -27,4 +27,7 @@ public class EmployeeService {
     public EmployeeModel findBy(int id){
         return employeeRepo.findById(id).get();
     }
+    public List<EmployeeModel> getEmployeesByDepartment(int id) {
+        return employeeRepo.findByDepartmentId(id);
+    }
 }
