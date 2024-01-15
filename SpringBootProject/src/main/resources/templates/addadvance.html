@@ -26,9 +26,9 @@
 
             <div class="container">
 
-                <h2 class="text-center bg-info p-2" th:if="${id==null}">Add Leave</h2>
-                <h2 class="text-center bg-secondary p-2" th:if="${id!=null}">Update Leave</h2>
-                <form method="post" th:action="@{/leave/save}" th:object="${leave}">
+                <h2 class="text-center bg-info p-2" th:if="${id==null}">Add Advance</h2>
+                <h2 class="text-center bg-secondary p-2" th:if="${id!=null}">Update Advance</h2>
+                <form method="post" th:action="@{/advance/save}" th:object="${advance}">
                     <input class="form-control" th:field="*{id}" type="hidden">
 
                     <div class="mb-3">
@@ -48,8 +48,12 @@
 
 
                     <div class="mb-3">
-                        <label class="form-label">Leave Date</label>
-                        <input class="form-control" th:field="*{leaveDate}" type="date">
+                        <label class="form-label">Advance Date</label>
+                        <input class="form-control" th:field="*{advanceDate}" type="date">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Amount</label>
+                        <input class="form-control" th:field="*{amount}" type="text">
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
@@ -57,13 +61,7 @@
                             <label for="floatingTextarea2" >Comments</label>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <select class="form-select" aria-label="Default select example" th:field="*{leaveType}">
-                            <option th:value="null" >Open this select menu</option>
-                            <option th:value="PaidLeave" >Paid Leave</option>
-                            <option th:value="UnPaidLeave">UnPaid Leave</option>
-                        </select>
-                    </div>
+
 
 
 

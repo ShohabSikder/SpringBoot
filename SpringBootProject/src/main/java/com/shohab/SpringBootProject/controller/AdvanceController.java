@@ -1,13 +1,13 @@
 package com.shohab.SpringBootProject.controller;
 
+import com.shohab.SpringBootProject.model.Advance;
 import com.shohab.SpringBootProject.model.Attendance;
 import com.shohab.SpringBootProject.model.Department;
 import com.shohab.SpringBootProject.model.EmployeeModel;
-import com.shohab.SpringBootProject.model.Leave;
+import com.shohab.SpringBootProject.service.AdvanceService;
 import com.shohab.SpringBootProject.service.AttendanceService;
 import com.shohab.SpringBootProject.service.DepartmentService;
 import com.shohab.SpringBootProject.service.EmployeeService;
-import com.shohab.SpringBootProject.service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/leave")
-public class LeaveController {
+@RequestMapping("/advance")
+public class AdvanceController {
     @Autowired
     private EmployeeService employeeService;
     @Autowired
     private DepartmentService departmentService;
 
     @Autowired
-    private LeaveService leaveService;
+    private AdvanceService advanceService;
 
     @GetMapping("")
-    public  String allLeave(Model m){
-        List<Leave> leaveList=leaveService.getAllLeave();
-        m.addAttribute("leaveList", leaveList);
-        m.addAttribute("title", "All Leave");
-        return  "allleave";
+    public  String allAdvance(Model m){
+        List<Advance> advanceList=advanceService.getAllAdvance();
+        m.addAttribute("advanceList", advanceList);
+        m.addAttribute("title", "All Advance");
+        return  "alladvance";
     }
     @GetMapping("/addform")
-    public  String addLeave(Model m) {
+    public  String addAdvance(Model m) {
 // data comes from Department table using List, DepartmentService
         List<Department> depList = departmentService.getAllDepartment();
         // to add department as dropdown from Department Model using Join Querry
@@ -46,28 +46,27 @@ public class LeaveController {
         m.addAttribute("employee", new EmployeeModel());
         m.addAttribute("employeeList", employeeList);
 
-
-        //Leave part
-        m.addAttribute("leave", new Leave());
-        m.addAttribute("title", "Add Leave");
-        return  "addleave";
+        //Attendance part
+        m.addAttribute("advance", new Advance());
+        m.addAttribute("title", "Add Advance");
+        return  "addadvance";
 
 
     }
     @PostMapping("/save")
-    public String saveLeave(@ModelAttribute Leave leave) {
-        leaveService.saveLeave(leave);
-        return "redirect:/leave";
+    public String saveAdvance(@ModelAttribute Advance advance) {
+        advanceService.saveAdvance(advance);
+        return "redirect:/advance";
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteLeave(@PathVariable int id){
-        leaveService.deleteById(id);
-        return "redirect:/leave";
+    public String deleteAdvance(@PathVariable int id){
+        advanceService.deleteById(id);
+        return "redirect:/advance";
     }
 
     @RequestMapping("/edit/{id}")
-    public String editLeave(@PathVariable int id, Model m){
+    public String editAttendance(@PathVariable int id, Model m){
         List<Department> depList = departmentService.getAllDepartment();
         // to add department as dropdown from Department Model using Join Querry
         m.addAttribute("department", new Department());
@@ -78,9 +77,9 @@ public class LeaveController {
         m.addAttribute("employee", new EmployeeModel());
         m.addAttribute("employeeList", employeeList);
 
-        Leave leave=leaveService.findBy(id);
-        m.addAttribute("leave", leave);
-        return "addleave";
+        Advance advance=advanceService.editById(id);
+        m.addAttribute("advance", advance);
+        return "addadvance";
 
     }
 }
