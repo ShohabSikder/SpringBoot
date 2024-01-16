@@ -34,7 +34,7 @@
                 <form id="departmentForm">
                     <select id="departmentSelect" class="form-select" aria-label="Select Department">
                         <option value="" selected>Select Department</option>
-                        <option th:each="dept : ${depList}" th:value="${dept.id}" th:text="${dept.name}">${dept.name}</option>
+                        <option th:each="dept : ${department}" th:value="${dept.id}" th:text="${dept.name}">${dept.name}</option>
                     </select>
                     <button type="button" class="btn btn-primary" onclick="getEmployees()">Show Employees</button>
                 </form>

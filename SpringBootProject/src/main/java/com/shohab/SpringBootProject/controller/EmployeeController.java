@@ -26,7 +26,7 @@ public class EmployeeController {
     @GetMapping("")
     public  String allEmployee(Model m){
         List<EmployeeModel> employeeList=employeeService.getAllEmployee();
-        List<Department>depList=departmentService.getAllDepartment();
+        List<Department> depList=departmentService.getAllDepartment();
 
         m.addAttribute("department", depList);
         m.addAttribute("employeeList", employeeList);
@@ -96,7 +96,7 @@ public class EmployeeController {
         List<Department> departments = departmentRepo.findAll();
 
         // Add data to the model
-        model.addAttribute("departmentList", departments);  // Corrected attribute name
+        model.addAttribute("department", departments);  // Corrected attribute name
         model.addAttribute("employeeList", employees);
         model.addAttribute("selectedDepartment", department);
 
