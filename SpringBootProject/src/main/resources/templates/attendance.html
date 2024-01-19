@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Records</title>
+</head>
+<body>
+<h1>Attendance Records</h1>
+
+<!-- Check-in form -->
+<form action="/attendance/check-in" method="get">
+  <button type="submit">Check In</button>
+</form>
+
+<!-- Check-out form -->
+<form action="/attendance/check-out" method="get">
+  <button type="submit">Check Out</button>
+</form>
+
+<br/>
+
+<!-- Attendance table -->
+<table border="1">
+  <thead>
+  <tr class="table table-striped">
+    <th>User</th>
+    <th>Check-In Time</th>
+    <th>Check-Out Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="attendance : ${attendanceList}">
+    <td th:text="${attendance.user.username}"></td>
+    <td th:text="${attendance.checkInTime}"></td>
+    <td th:text="${attendance.checkOutTime}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

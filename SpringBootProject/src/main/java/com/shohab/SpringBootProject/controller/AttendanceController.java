@@ -3,6 +3,8 @@ package com.shohab.SpringBootProject.controller;
 import com.shohab.SpringBootProject.model.Attendance;
 import com.shohab.SpringBootProject.model.Department;
 import com.shohab.SpringBootProject.model.EmployeeModel;
+import com.shohab.SpringBootProject.model.User;
+import com.shohab.SpringBootProject.repository.AttendanceRepo;
 import com.shohab.SpringBootProject.service.AttendanceService;
 import com.shohab.SpringBootProject.service.DepartmentService;
 import com.shohab.SpringBootProject.service.EmployeeService;
@@ -23,13 +25,15 @@ public class AttendanceController {
 
     @Autowired
     private AttendanceService attendanceService;
+    @Autowired
+    private AttendanceRepo attendanceRepo;
 
     @GetMapping("")
     public  String allAttendance(Model m){
         List<Attendance> attendanceList=attendanceService.getAllAttendance();
         m.addAttribute("attendanceList", attendanceList);
         m.addAttribute("title", "All Attendance");
-        return  "allattendance";
+        return  "attendance";
     }
     @GetMapping("/addform")
     public  String addAttendance(Model m) {
@@ -47,7 +51,7 @@ public class AttendanceController {
         //Attendance part
         m.addAttribute("attendance", new Attendance());
         m.addAttribute("title", "Add Attendance");
-        return  "addattendance";
+        return  "attendance";
 
 
     }
@@ -80,6 +84,19 @@ public class AttendanceController {
         return "addattendance";
 
     }
+
+    @GetMapping("/check-in")
+    public String checkIn(User user) {
+        attendanceService.checkIn(user);
+        return "redirect:/attendance";
+    }
+
+    @GetMapping("/check-out")
+    public String checkOut(User user) {
+        attendanceService.checkOut(user);
+        return "redirect:/attendance";
+    }
+
 
 
 }

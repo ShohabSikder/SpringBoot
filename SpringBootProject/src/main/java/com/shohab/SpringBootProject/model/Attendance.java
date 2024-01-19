@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity(name = "attendance")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,15 +16,13 @@ public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private String department;
-    @Column(nullable = false)
-    private String inTime;
-    @Column(nullable = false)
-    private String outTime;
-    @Column(nullable = false)
-    private String date;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private LocalDateTime checkInTime;
+
+    private LocalDateTime checkOutTime;
 
 }
