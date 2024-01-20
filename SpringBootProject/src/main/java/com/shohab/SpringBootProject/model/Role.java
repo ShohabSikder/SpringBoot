@@ -12,8 +12,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @Data
 public class Role {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
@@ -48,7 +46,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return  this.name ;
+        return this.name;
     }
-
 }

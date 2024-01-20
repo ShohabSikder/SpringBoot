@@ -85,17 +85,17 @@ public class AttendanceController {
 
     }
 
-    @GetMapping("/check-in")
-    public String checkIn(User user) {
-        attendanceService.checkIn(user);
-        return "redirect:/attendance";
-    }
-
-    @GetMapping("/check-out")
-    public String checkOut(User user) {
-        attendanceService.checkOut(user);
-        return "redirect:/attendance";
-    }
+//    @GetMapping("/check-in")
+//    public String checkIn(User user) {
+//        attendanceService.checkIn(user);
+//        return "redirect:/attendance";
+//    }
+//
+//    @GetMapping("/check-out")
+//    public String checkOut(User user) {
+//        attendanceService.checkOut(user);
+//        return "redirect:/attendance";
+//    }
 
 
 

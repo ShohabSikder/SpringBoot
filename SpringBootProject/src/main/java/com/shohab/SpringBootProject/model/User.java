@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,15 +25,6 @@ public class User {
 
     @Column(nullable = false)
     private String name;
-    @Column()
-    private String cellNo;
-
-    private String gender;
-
-    private Date dob;
-    private String image;
-    private  boolean isEnable;
-
 
     @ManyToMany(
             fetch = FetchType.EAGER
@@ -46,18 +36,14 @@ public class User {
     )
     private Set<Role> roles=new HashSet<>();
 
-
     public void  addRole(Role role){
 
         this.roles.add(role);
     }
-
     public User(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
     }
+
 }
-
-
-
