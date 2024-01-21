@@ -48,17 +48,17 @@
                     </div>
                     <ul>
                         <li class="active">
-                            <a href="/employee/index"><img alt="sidebar_img" src="/assets/img/home.svg">
+                            <a href="public/employee"><img alt="sidebar_img" src="/assets/img/home.svg">
                                 <span>Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="/employee/addform">
+                            <a href="public/employee/addform" target="_blank">
                                 <img alt="sidebar_img" src="/assets/img/employee.svg">
                                 <span>Employees</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/employee">
+                            <a href="public/employee">
                                 <img alt="sidebar_img" src="/assets/img/employee.svg">
                                 <span>All Employees</span>
                             </a>
@@ -101,11 +101,17 @@
                             <a href="review.html"><img alt="sidebar_img" src="/assets/img/review.svg"><span>Salary</span></a>
                         </li>
                         <li>
-                            <a href="report.html"><img alt="sidebar_img" src="/assets/img/report.svg"><span>Report</span></a>
+                            <a th:href="@{/public/user/saveform}">
+                                <img alt="sidebar_img" src="/assets/img/report.svg">
+                                <span>Add User</span>
+                            </a>
                         </li>
+
                         <li>
-                            <a href="manage.html"><img alt="sidebar_img" src="/assets/img/manage.svg">
-                                <span>Manage</span></a>
+                            <a th:href="@{/public/user}">
+                                <img alt="sidebar_img" src="/assets/img/manage.svg">
+                                <span>All User</span>
+                            </a>
                         </li>
                         <li>
                             <a href="settings.html"><img alt="sidebar_img"src="/assets/img/settings.svg"><span>Settings</span></a>

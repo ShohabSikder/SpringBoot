@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("public/user")
 public class UserController {
     @Autowired
     IUserRepository userRepo;
@@ -45,8 +45,10 @@ public class UserController {
         BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         Role userRole=new Role(1);
+//        Role userRole = roleRepo.findById(1).orElse(null); // assuming role with ID 1 exists
+
         user.addRole(userRole);
         userRepo.save(user);
-        return "redirect:/user";
+        return "redirect:/public/user/saveform";
     }
 }
