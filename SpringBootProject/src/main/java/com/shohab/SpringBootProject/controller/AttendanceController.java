@@ -9,6 +9,9 @@ import com.shohab.SpringBootProject.service.AttendanceService;
 import com.shohab.SpringBootProject.service.DepartmentService;
 import com.shohab.SpringBootProject.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -85,17 +88,30 @@ public class AttendanceController {
 
     }
 
-//    @GetMapping("/check-in")
-//    public String checkIn(User user) {
-//        attendanceService.checkIn(user);
-//        return "redirect:/attendance";
-//    }
-//
-//    @GetMapping("/check-out")
-//    public String checkOut(User user) {
-//        attendanceService.checkOut(user);
-//        return "redirect:/attendance";
-//    }
+    @GetMapping("/check-in")
+    public String checkIn() {
+        User loggedInUser = getCurrentLoggedInUser();
+        attendanceService.checkIn(loggedInUser);
+        return "redirect:/attendance";
+    }
+
+    @GetMapping("/check-out")
+    public String checkOut() {
+        User loggedInUser = getCurrentLoggedInUser();
+        attendanceService.checkOut(loggedInUser);
+        return "redirect:/attendance";
+    }
+    private User getCurrentLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            return (User) authentication.getPrincipal();
+        }
+        // Handle the case where the user is not authenticated or the principal is not of type User
+        return null;
+    }
+
+
+
 
 
 

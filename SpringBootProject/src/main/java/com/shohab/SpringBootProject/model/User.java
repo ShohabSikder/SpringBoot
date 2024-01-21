@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,13 +18,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true,nullable = true)
     private String email;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String name;
 
     @ManyToMany(
@@ -35,6 +36,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles=new HashSet<>();
+
+
 
     public void  addRole(Role role){
 

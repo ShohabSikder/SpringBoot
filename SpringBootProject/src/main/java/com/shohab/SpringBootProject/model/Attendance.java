@@ -17,9 +17,11 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER , cascade={CascadeType.REMOVE,CascadeType.PERSIST})
     @JoinColumn(name = "user_id")
     private User user;
+
+
 
     private LocalDateTime checkInTime;
 

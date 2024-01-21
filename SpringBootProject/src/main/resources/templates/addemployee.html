@@ -13,7 +13,19 @@
 
     <style>
         .mb-4 {
-            margin-top: -650px;
+            margin-top: -926px;
+        }
+        .gender-container {
+            margin-bottom: 15px;
+        }
+
+        .gender-label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .gender-input {
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -61,13 +73,18 @@
                         </div>
 
 
-                        <div class="mb-3">
-                            <label class="form-label">Gender</label><br>
-                            <input class="form-check-input" name="gender" th:field="*{gender}" type="radio" value="male">
-                            <label class="form-check-label">Male</label>
-                            <input class="form-check-input" name="gender" th:field="*{gender}" type="radio"value="Female">
-                            <label class="form-check-label"> Female </label>
+                        <div class="mb-3 gender-container">
+                            <label class="form-label gender-label">Gender</label>
+                            <div class="form-check gender-input">
+                                <input class="form-check-input" name="gender" th:field="*{gender}" type="radio" value="male">
+                                <label class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check gender-input">
+                                <input class="form-check-input" name="gender" th:field="*{gender}" type="radio" value="Female">
+                                <label class="form-check-label">Female</label>
+                            </div>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Salary</label>
                             <input class="form-control" th:field="*{salary}" type="text">

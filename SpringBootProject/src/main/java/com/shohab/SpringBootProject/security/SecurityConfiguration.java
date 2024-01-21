@@ -5,8 +5,10 @@ package com.shohab.SpringBootProject.security;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +31,11 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+
+
+
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception{
 
@@ -36,7 +43,7 @@ public class SecurityConfiguration {
         http
 
                 .authorizeHttpRequests((au)->au
-                        .requestMatchers( "/assets/**","public/user/**","public/employee/**","/","/login")
+                        .requestMatchers( "/assets/**","public/user/**","/","/login")
                         .permitAll()
                         .requestMatchers("/admin/**")
                         .hasRole("ADMIN")
