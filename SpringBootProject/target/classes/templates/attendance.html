@@ -33,7 +33,7 @@
     </thead>
     <tbody>
     <tr th:each="attendance : ${attendanceList}">
-      <td th:text="${attendance.user.name}"></td>
+      <td th:text="${userName}"></td>
       <td th:text="${attendance.checkInTime}"></td>
       <td th:text="${attendance.checkOutTime}"></td>
     </tr>

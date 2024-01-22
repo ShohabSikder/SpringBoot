@@ -45,6 +45,7 @@ public class AttendanceService {
         if (!userAttendance.isEmpty()) {
             Attendance latestAttendance = userAttendance.get(userAttendance.size() - 1);
             latestAttendance.setCheckOutTime(LocalDateTime.now());
+
             attendanceRepo.save(latestAttendance);
         } else {
             // Log a message indicating no attendance records were found for the user

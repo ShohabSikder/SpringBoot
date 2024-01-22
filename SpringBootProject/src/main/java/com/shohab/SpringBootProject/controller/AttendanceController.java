@@ -5,6 +5,7 @@ import com.shohab.SpringBootProject.model.Department;
 import com.shohab.SpringBootProject.model.EmployeeModel;
 import com.shohab.SpringBootProject.model.User;
 import com.shohab.SpringBootProject.repository.AttendanceRepo;
+import com.shohab.SpringBootProject.repository.IUserRepository;
 import com.shohab.SpringBootProject.service.AttendanceService;
 import com.shohab.SpringBootProject.service.DepartmentService;
 import com.shohab.SpringBootProject.service.EmployeeService;
@@ -30,6 +31,9 @@ public class AttendanceController {
     private AttendanceService attendanceService;
     @Autowired
     private AttendanceRepo attendanceRepo;
+
+    @Autowired
+    IUserRepository userRepository;
 
     @GetMapping("")
     public  String allAttendance(Model m){
@@ -89,16 +93,18 @@ public class AttendanceController {
     }
 
     @GetMapping("/check-in")
-    public String checkIn() {
-        User loggedInUser = getCurrentLoggedInUser();
+    public String checkIn(Model model) {
+        User loggedInUser = userRepository.findById(4).get();
         attendanceService.checkIn(loggedInUser);
+        model.addAttribute("userName", loggedInUser.getName());
         return "redirect:/attendance";
     }
 
     @GetMapping("/check-out")
-    public String checkOut() {
-        User loggedInUser = getCurrentLoggedInUser();
+    public String checkOut(Model model) {
+        User loggedInUser = userRepository.findById(4).get();
         attendanceService.checkOut(loggedInUser);
+        model.addAttribute("userName", loggedInUser.getName());
         return "redirect:/attendance";
     }
     private User getCurrentLoggedInUser() {
