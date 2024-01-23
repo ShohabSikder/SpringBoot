@@ -30,7 +30,7 @@ CREATE TABLE `advance` (
   `name` varchar(255) NOT NULL,
   `reason` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `advance` (
 
 LOCK TABLES `advance` WRITE;
 /*!40000 ALTER TABLE `advance` DISABLE KEYS */;
+INSERT INTO `advance` VALUES (1,'2024-01-26',5000,'Accounting','Anisur Rahman','Emergency'),(2,'2024-01-26',2000,'Web Devoloper','Sabit','birthday');
 /*!40000 ALTER TABLE `advance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +59,7 @@ CREATE TABLE `attendance` (
   PRIMARY KEY (`id`),
   KEY `FK46cuxphi3uh5quom51s6i2q8x` (`user_id`),
   CONSTRAINT `FK46cuxphi3uh5quom51s6i2q8x` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +68,7 @@ CREATE TABLE `attendance` (
 
 LOCK TABLES `attendance` WRITE;
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
-INSERT INTO `attendance` VALUES (1,'2024-01-22 01:22:05.226511',NULL,4,NULL),(2,'2024-01-22 01:27:54.216541',NULL,5,NULL),(3,'2024-01-22 01:38:29.203715',NULL,NULL,NULL),(4,'2024-01-22 01:39:13.024175',NULL,NULL,NULL),(5,'2024-01-22 01:39:15.448253',NULL,NULL,NULL),(6,'2024-01-22 01:47:20.448674',NULL,NULL,NULL),(7,'2024-01-22 01:51:39.607448',NULL,NULL,NULL),(8,'2024-01-22 01:54:43.621956',NULL,NULL,NULL),(9,'2024-01-22 01:55:57.430267',NULL,NULL,NULL),(10,'2024-01-22 01:56:15.711299',NULL,NULL,NULL),(11,'2024-01-22 01:57:18.327665',NULL,NULL,NULL);
+INSERT INTO `attendance` VALUES (1,'2024-01-24 01:07:54.740793','2024-01-24 01:07:57.058893',6,NULL),(2,'2024-01-24 01:12:45.159289','2024-01-24 01:12:46.610500',6,NULL),(3,'2024-01-24 01:17:14.816421','2024-01-24 01:17:16.778395',6,NULL),(4,'2024-01-24 01:17:51.048089','2024-01-24 01:17:52.338289',8,NULL),(5,'2024-01-24 02:21:06.916855','2024-01-24 02:21:09.233112',8,NULL);
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +146,7 @@ CREATE TABLE `employee_leave` (
   `name` varchar(255) NOT NULL,
   `reason` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,6 +155,7 @@ CREATE TABLE `employee_leave` (
 
 LOCK TABLES `employee_leave` WRITE;
 /*!40000 ALTER TABLE `employee_leave` DISABLE KEYS */;
+INSERT INTO `employee_leave` VALUES (1,'Accounting','2024-01-25','PaidLeave','Anisur Rahman','Sick');
 /*!40000 ALTER TABLE `employee_leave` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +198,7 @@ CREATE TABLE `user` (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ob8kqyqqgmefl0aco34akdtpe` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +207,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'shohab4057@gmail.com','Shohab','$2a$10$g6rus6y1u2ceJhqhk2Tc2.ro0jxI1eXMPsorvwdyypzmTXKnyI3km'),(3,'anis4057@gmail.com','Anis','$2a$10$FZSj.xFvU.6R6OMEgBVmHu4QnA4Eb.BwUAhSBWMGwjIp8hLKdi1Sq'),(4,NULL,NULL,NULL),(5,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (2,'shohab4057@gmail.com','Shohab','$2a$10$g6rus6y1u2ceJhqhk2Tc2.ro0jxI1eXMPsorvwdyypzmTXKnyI3km'),(3,'anis4057@gmail.com','Anis','$2a$10$FZSj.xFvU.6R6OMEgBVmHu4QnA4Eb.BwUAhSBWMGwjIp8hLKdi1Sq'),(4,NULL,NULL,NULL),(5,NULL,NULL,NULL),(6,'tameem@gmail.com','Tameem','$2a$10$KaVrmFSuO1pohXJ.YKvNxekh1vyBBRXHcs/F8RYmlHHrneUIaRs.G'),(7,'sabithassan06@gmail.com','Sabit','$2a$10$SHMvrIl4hfRJAtS6z2hC6ejudRxOmgJAViyJbC/oT.xG8rAeGqP26'),(8,'sakib@gmail.com','sakib','$2a$10$9B69kq5dHpk7DIJJF6MpieZGs.zLGqaLNyxOa4JS/Bfkww7nJVB1K');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +234,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (2,1),(3,1);
+INSERT INTO `user_roles` VALUES (2,1),(3,1),(7,1),(8,1),(6,2);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -245,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-22  2:07:48
+-- Dump completed on 2024-01-24  3:20:59

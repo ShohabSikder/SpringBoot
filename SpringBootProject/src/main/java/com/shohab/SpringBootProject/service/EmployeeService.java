@@ -27,6 +27,7 @@ public class EmployeeService {
     public EmployeeModel findBy(int id){
         return employeeRepo.findById(id).get();
     }
+    //এইটা ডিপার্টেমেন্ট অনুযায়ী নাম দেখানোর জন্য মেথড বানানো হয়েছে
     public List<EmployeeModel> getEmployeesByDepartment(int id) {
         return employeeRepo.findByDepartmentId(id);
     }

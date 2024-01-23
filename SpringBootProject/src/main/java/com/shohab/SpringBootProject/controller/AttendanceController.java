@@ -9,14 +9,19 @@ import com.shohab.SpringBootProject.repository.IUserRepository;
 import com.shohab.SpringBootProject.service.AttendanceService;
 import com.shohab.SpringBootProject.service.DepartmentService;
 import com.shohab.SpringBootProject.service.EmployeeService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -34,6 +39,8 @@ public class AttendanceController {
 
     @Autowired
     IUserRepository userRepository;
+
+
 
     @GetMapping("")
     public  String allAttendance(Model m){
@@ -94,27 +101,36 @@ public class AttendanceController {
 
     @GetMapping("/check-in")
     public String checkIn(Model model) {
-        User loggedInUser = userRepository.findById(4).get();
+        User loggedInUser = userRepository.findById(8).get();
         attendanceService.checkIn(loggedInUser);
         model.addAttribute("userName", loggedInUser.getName());
-        return "redirect:/attendance";
+        return "redirect:/attendance?userName=" + loggedInUser.getName();
     }
+
+
+
+
+
 
     @GetMapping("/check-out")
     public String checkOut(Model model) {
-        User loggedInUser = userRepository.findById(4).get();
+        User loggedInUser = userRepository.findById(8).get();
         attendanceService.checkOut(loggedInUser);
         model.addAttribute("userName", loggedInUser.getName());
         return "redirect:/attendance";
     }
-    private User getCurrentLoggedInUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof User) {
-            return (User) authentication.getPrincipal();
-        }
-        // Handle the case where the user is not authenticated or the principal is not of type User
-        return null;
-    }
+
+
+
+
+//    private User getCurrentLoggedInUser() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null && authentication.getPrincipal() instanceof User) {
+//            return (User) authentication.getPrincipal();
+//        }
+//        // Handle the case where the user is not authenticated or the principal is not of type User
+//        return null;
+//    }
 
 
 

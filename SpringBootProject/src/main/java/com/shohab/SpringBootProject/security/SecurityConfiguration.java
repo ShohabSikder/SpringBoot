@@ -31,11 +31,6 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-
-
-
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception{
 
@@ -43,7 +38,7 @@ public class SecurityConfiguration {
         http
 
                 .authorizeHttpRequests((au)->au
-                        .requestMatchers( "/assets/**","public/user/**","/","/login")
+                        .requestMatchers( "/assets/**","public/user/**","/","/login","/index")
                         .permitAll()
                         .requestMatchers("/admin/**")
                         .hasRole("ADMIN")

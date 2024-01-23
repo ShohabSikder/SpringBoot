@@ -4,11 +4,13 @@ import com.shohab.SpringBootProject.model.Advance;
 import com.shohab.SpringBootProject.model.Attendance;
 import com.shohab.SpringBootProject.model.Department;
 import com.shohab.SpringBootProject.model.EmployeeModel;
+import com.shohab.SpringBootProject.repository.DepartmentRepo;
 import com.shohab.SpringBootProject.service.AdvanceService;
 import com.shohab.SpringBootProject.service.AttendanceService;
 import com.shohab.SpringBootProject.service.DepartmentService;
 import com.shohab.SpringBootProject.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,8 @@ public class AdvanceController {
     private EmployeeService employeeService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private DepartmentRepo departmentRepo;
 
     @Autowired
     private AdvanceService advanceService;
@@ -81,5 +85,25 @@ public class AdvanceController {
         m.addAttribute("advance", advance);
         return "addadvance";
 
+    }
+
+    @RequestMapping("/department/{id}")
+    public String getEmployeesByDepartment(@PathVariable int id, Model model) {
+        // Fetch employees by department
+        List<EmployeeModel> employees = employeeService.getEmployeesByDepartment(id);
+
+        // Fetch the selected department
+        Department department = departmentRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Department not found"));
+
+        // Fetch all departments to populate the dropdown
+        List<Department> departments = departmentRepo.findAll();
+
+        // Add data to the model
+        model.addAttribute("department", departments);  // Corrected attribute name
+        model.addAttribute("employeeList", employees);
+        model.addAttribute("selectedDepartment", department);
+
+        return "alladvance";
     }
 }

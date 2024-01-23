@@ -11,17 +11,25 @@
   <h1 class="mb-4">Attendance Records</h1>
 
   <!-- Check-in form -->
-  <form action="/attendance/check-in" method="get">
-    <button type="submit" class="btn btn-primary">Check In</button>
-  </form>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form action="/attendance/check-in" method="get">
+          <button type="submit" class="btn btn-primary">Check In</button>
+        </form>
+        <br/>
+        <!-- Check-out form -->
+        <form action="/attendance/check-out" method="get">
+          <button type="submit" class="btn btn-danger">Check Out</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-  <!-- Check-out form -->
-  <form action="/attendance/check-out" method="get">
-    <button type="submit" class="btn btn-danger">Check Out</button>
-  </form>
 
   <br/>
 
+  <!-- Attendance table -->
   <!-- Attendance table -->
   <table class="table table-striped">
     <thead>
@@ -33,12 +41,14 @@
     </thead>
     <tbody>
     <tr th:each="attendance : ${attendanceList}">
-      <td th:text="${userName}"></td>
+      <td th:text="${attendance.user.name}"></td>
       <td th:text="${attendance.checkInTime}"></td>
       <td th:text="${attendance.checkOutTime}"></td>
     </tr>
+
     </tbody>
   </table>
+
 </div>
 
 <!-- Add Bootstrap JS and Popper.js -->

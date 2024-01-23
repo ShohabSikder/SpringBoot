@@ -84,6 +84,7 @@ public class EmployeeController {
 //        return "addemployee";
 //    }
 
+    //ডিপার্টমেন্ট অনুযায়ী নাম দেখানোর জন্য
     @RequestMapping("/department/{id}")
     public String getEmployeesByDepartment(@PathVariable int id, Model model) {
         // Fetch employees by department
