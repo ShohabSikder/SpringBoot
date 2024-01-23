@@ -23,6 +23,7 @@ public class EmployeeController {
     @Autowired
     private DepartmentRepo departmentRepo;
 
+
     @GetMapping("")
     public  String allEmployee(Model m){
         List<EmployeeModel> employeeList=employeeService.getAllEmployee();
@@ -78,10 +79,10 @@ public class EmployeeController {
         return "addemployee";
 
     }
-    @GetMapping("/index")
-    public String home(){
-        return "index";
-    }
+//    @GetMapping("")
+//    public String home(){
+//        return "addemployee";
+//    }
 
     @RequestMapping("/department/{id}")
     public String getEmployeesByDepartment(@PathVariable int id, Model model) {
@@ -113,5 +114,7 @@ public class EmployeeController {
 //
 //        return "redirect:/employee";
 //    }
+
+
 
 }
