@@ -27,7 +27,5 @@ public class AdvanceService {
     public Advance editById(int id){
         return advanceRepo.findById(id).get();
     }
-    public List<EmployeeModel> getEmployeesByDepartment(int id) {
-        return employeeRepo.findByDepartmentId(id);
-    }
+
 }

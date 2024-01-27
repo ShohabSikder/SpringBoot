@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/leave")
+@RequestMapping("admin/leave")
 public class LeaveController {
     @Autowired
     private EmployeeService employeeService;

@@ -107,11 +107,6 @@ public class AttendanceController {
         return "redirect:/attendance?userName=" + loggedInUser.getName();
     }
 
-
-
-
-
-
     @GetMapping("/check-out")
     public String checkOut(Model model) {
         User loggedInUser = userRepository.findById(8).get();

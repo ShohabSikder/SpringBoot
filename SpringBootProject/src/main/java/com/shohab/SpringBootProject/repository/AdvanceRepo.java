@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface AdvanceRepo extends JpaRepository<Advance,Integer> {
-    List<EmployeeModel> findByDepartmentId(int id);
+
 }

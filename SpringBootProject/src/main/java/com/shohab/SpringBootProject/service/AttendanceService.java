@@ -35,10 +35,6 @@ public class AttendanceService {
         attendanceRepo.save(attendance);
     }
 
-
-
-
-
     public void checkOut(User user) {
         List<Attendance> userAttendance = attendanceRepo.findByUserId(user.getId());
 

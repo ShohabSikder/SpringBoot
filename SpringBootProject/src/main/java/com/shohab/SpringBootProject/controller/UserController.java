@@ -44,7 +44,7 @@ public class UserController {
 
         BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        Role userRole=new Role(1);
+        Role userRole=new Role(2);
 //        Role userRole = roleRepo.findById(1).orElse(null); // assuming role with ID 1 exists
 
         user.addRole(userRole);

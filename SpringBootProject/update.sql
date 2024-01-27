@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: springbootproject
 -- ------------------------------------------------------
--- Server version	8.0.31
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,7 +59,7 @@ CREATE TABLE `attendance` (
   PRIMARY KEY (`id`),
   KEY `FK46cuxphi3uh5quom51s6i2q8x` (`user_id`),
   CONSTRAINT `FK46cuxphi3uh5quom51s6i2q8x` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `attendance` (
 
 LOCK TABLES `attendance` WRITE;
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
-INSERT INTO `attendance` VALUES (1,'2024-01-24 01:07:54.740793','2024-01-24 01:07:57.058893',6,NULL),(2,'2024-01-24 01:12:45.159289','2024-01-24 01:12:46.610500',6,NULL),(3,'2024-01-24 01:17:14.816421','2024-01-24 01:17:16.778395',6,NULL),(4,'2024-01-24 01:17:51.048089','2024-01-24 01:17:52.338289',8,NULL),(5,'2024-01-24 02:21:06.916855','2024-01-24 02:21:09.233112',8,NULL);
+INSERT INTO `attendance` VALUES (1,'2024-01-24 01:07:54.740793','2024-01-24 01:07:57.058893',6,NULL),(2,'2024-01-24 01:12:45.159289','2024-01-24 01:12:46.610500',6,NULL),(3,'2024-01-24 01:17:14.816421','2024-01-24 01:17:16.778395',6,NULL),(4,'2024-01-24 01:17:51.048089','2024-01-24 01:17:52.338289',8,NULL),(5,'2024-01-24 02:21:06.916855','2024-01-24 02:21:09.233112',8,NULL),(6,'2024-01-24 09:37:27.364999','2024-01-24 09:37:49.178673',8,NULL),(7,'2024-01-24 09:45:15.036927','2024-01-24 09:45:18.110709',8,NULL),(8,'2024-01-24 10:46:34.926142','2024-01-24 10:46:42.602617',8,NULL);
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `user` (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ob8kqyqqgmefl0aco34akdtpe` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +207,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'shohab4057@gmail.com','Shohab','$2a$10$g6rus6y1u2ceJhqhk2Tc2.ro0jxI1eXMPsorvwdyypzmTXKnyI3km'),(3,'anis4057@gmail.com','Anis','$2a$10$FZSj.xFvU.6R6OMEgBVmHu4QnA4Eb.BwUAhSBWMGwjIp8hLKdi1Sq'),(4,NULL,NULL,NULL),(5,NULL,NULL,NULL),(6,'tameem@gmail.com','Tameem','$2a$10$KaVrmFSuO1pohXJ.YKvNxekh1vyBBRXHcs/F8RYmlHHrneUIaRs.G'),(7,'sabithassan06@gmail.com','Sabit','$2a$10$SHMvrIl4hfRJAtS6z2hC6ejudRxOmgJAViyJbC/oT.xG8rAeGqP26'),(8,'sakib@gmail.com','sakib','$2a$10$9B69kq5dHpk7DIJJF6MpieZGs.zLGqaLNyxOa4JS/Bfkww7nJVB1K');
+INSERT INTO `user` VALUES (2,'shohab4057@gmail.com','Shohab','$2a$10$g6rus6y1u2ceJhqhk2Tc2.ro0jxI1eXMPsorvwdyypzmTXKnyI3km'),(3,'anis4057@gmail.com','Anis','$2a$10$FZSj.xFvU.6R6OMEgBVmHu4QnA4Eb.BwUAhSBWMGwjIp8hLKdi1Sq'),(4,NULL,NULL,NULL),(5,NULL,NULL,NULL),(6,'tameem@gmail.com','Tameem','$2a$10$KaVrmFSuO1pohXJ.YKvNxekh1vyBBRXHcs/F8RYmlHHrneUIaRs.G'),(7,'sabithassan06@gmail.com','Sabit','$2a$10$SHMvrIl4hfRJAtS6z2hC6ejudRxOmgJAViyJbC/oT.xG8rAeGqP26'),(8,'sakib@gmail.com','sakib','$2a$10$9B69kq5dHpk7DIJJF6MpieZGs.zLGqaLNyxOa4JS/Bfkww7nJVB1K'),(9,'rakib@gmail.com','Rakib','$2a$10$mNYcjcuzEoa1u0/C0E6fWukL9Lbnlx2uUJWSkM52uXB5rXLTiTgXq');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,7 +234,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (2,1),(3,1),(7,1),(8,1),(6,2);
+INSERT INTO `user_roles` VALUES (2,1),(3,1),(7,1),(8,1),(6,2),(9,2);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -247,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-24  3:20:59
+-- Dump completed on 2024-01-24 11:58:09

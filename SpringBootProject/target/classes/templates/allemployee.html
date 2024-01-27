@@ -19,7 +19,6 @@
         }
 
         .page-name {
-            margin-top: -858px;
             margin-bottom: 20px;
         }
 
@@ -27,21 +26,6 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-        }
-
-        #departmentForm {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        #departmentSelect {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .btn-show-employees {
-            width: 150px;
         }
 
         .card-container {
@@ -52,16 +36,7 @@
 
         .employee-card {
             width: 300px;
-            margin-bottom: 20px;
-        }
-
-        .table-header th {
-            background-color: #5cb85c;
-            color: white;
-        }
-
-        .btn-action {
-            margin-right: 5px;
+            margin: 0 10px 20px;
         }
     </style>
 </head>
@@ -115,9 +90,9 @@
         var selectedDepartmentId = document.getElementById("departmentSelect").value;
 
         if (selectedDepartmentId !== "") {
-            window.location.href = "/employee/department/" + selectedDepartmentId;
+            window.location.href = "/admin/employee/department/" + selectedDepartmentId;
         } else {
-            window.location.href = "/employee";
+            window.location.href = "/admin/employee";
         }
     }
 </script>

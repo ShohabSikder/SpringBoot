@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/advance")
+@RequestMapping("admin/advance")
 public class AdvanceController {
     @Autowired
     private EmployeeService employeeService;
@@ -87,23 +87,4 @@ public class AdvanceController {
 
     }
 
-    @RequestMapping("/department/{id}")
-    public String getEmployeesByDepartment(@PathVariable int id, Model model) {
-        // Fetch employees by department
-        List<EmployeeModel> employees = employeeService.getEmployeesByDepartment(id);
-
-        // Fetch the selected department
-        Department department = departmentRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Department not found"));
-
-        // Fetch all departments to populate the dropdown
-        List<Department> departments = departmentRepo.findAll();
-
-        // Add data to the model
-        model.addAttribute("department", departments);  // Corrected attribute name
-        model.addAttribute("employeeList", employees);
-        model.addAttribute("selectedDepartment", department);
-
-        return "alladvance";
-    }
 }

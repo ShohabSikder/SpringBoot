@@ -38,9 +38,9 @@ public class SecurityConfiguration {
         http
 
                 .authorizeHttpRequests((au)->au
-                        .requestMatchers( "/assets/**","public/user/**","/","/login","/index")
+                        .requestMatchers( "/assets/**","/","/login","/index")
                         .permitAll()
-                        .requestMatchers("/admin/**")
+                        .requestMatchers("/admin/**","public/user/**")
                         .hasRole("ADMIN")
                         .anyRequest().authenticated()
 

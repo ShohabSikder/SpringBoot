@@ -23,17 +23,7 @@
 <div class="content container-fluid ">
     <div class="page-name mb-2">
         <div class="container p-2 my-2 border mx-auto">
-            <form id="departmentForm">
-                <select id="departmentSelect" class="form-select" aria-label="Select Department">
-                    <option value="" selected>Select Department</option>
-                    <option th:each="dept : ${department}" th:value="${dept.id}" th:text="${dept.name}">
-                        ${dept.name}
-                    </option>
-                </select>
-                <button type="button" class="btn btn-primary btn-show-employees" onclick="getEmployees()">
-                    Show Employees
-                </button>
-            </form>
+
             <div class="container">
                 <table class="table  custom-table no-footer">
                     <thead>
@@ -78,17 +68,7 @@
         </div>
     </div>
 </div>
-<script>
-    function getEmployees() {
-        var selectedDepartmentId = document.getElementById("departmentSelect").value;
 
-        if (selectedDepartmentId !== "") {
-            window.location.href = "/employee/department/" + selectedDepartmentId;
-        } else {
-            window.location.href = "/employee";
-        }
-    }
-</script>
 
 
 <script crossorigin="anonymous"
