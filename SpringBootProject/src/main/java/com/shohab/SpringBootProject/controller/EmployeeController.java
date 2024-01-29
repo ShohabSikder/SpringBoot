@@ -26,11 +26,14 @@ public class EmployeeController {
 
     @GetMapping("")
     public  String allEmployee(Model m){
+        //To show all data
         List<EmployeeModel> employeeList=employeeService.getAllEmployee();
-        List<Department> depList=departmentService.getAllDepartment();
-
-        m.addAttribute("department", depList);
         m.addAttribute("employeeList", employeeList);
+
+        //To see as a dropdown of department in employee
+        List<Department> depList=departmentService.getAllDepartment();
+        m.addAttribute("department", depList);
+
 
         m.addAttribute("title", "All Employee");
         return  "allemployee";
