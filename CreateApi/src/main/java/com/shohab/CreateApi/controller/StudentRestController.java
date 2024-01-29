@@ -1,6 +1,8 @@
 package com.shohab.CreateApi.controller;
 
+import com.shohab.CreateApi.model.Department;
 import com.shohab.CreateApi.model.Student;
+import com.shohab.CreateApi.repository.IDepartmentRepo;
 import com.shohab.CreateApi.repository.IStudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,19 +12,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/student")
 @CrossOrigin("*")
 public class StudentRestController {
     @Autowired
     IStudentRepo iStudentRepo;
 
-    @GetMapping("/student")
+    @Autowired
+    IDepartmentRepo iDepartmentRepo;
+
+    @GetMapping("")
     public List<Student> allStudent(){
         return iStudentRepo.findAll();
     }
-    @PostMapping("/student")
-    public Student saveStudent(@RequestBody Student student){
-        return iStudentRepo.save(student);
+    @PostMapping("")
+    public ResponseEntity<Student> saveEmployee(@RequestBody Student student){
+
+        String name=student.getDepartment().getName();
+        Department department = iDepartmentRepo.findByName(name);
+
+        student.setDepartment(department);
+
+        Student savedEmployee = iStudentRepo.save(student);
+        return ResponseEntity.ok(savedEmployee);
+
     }
 
     @DeleteMapping("/student/{sid}")
