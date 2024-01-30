@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Department } from '../model/departmen.model';
+import { Department } from '../model/department.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DepartmentService } from '../service/department.service';
 
@@ -23,6 +23,7 @@ constructor(private depService:DepartmentService, private formBuilder:FormBuilde
       {
         name:['']
       }
+      
     );
 
 
@@ -40,7 +41,7 @@ getAllDep(){
 }
 
 saveDep(){
-  this.department.name=this.formValue.value.dname;
+  this.department.name=this.formValue.value.name;
   this.depService.saveDep(this.department)
   .subscribe(res=>{
     this.formValue.reset();

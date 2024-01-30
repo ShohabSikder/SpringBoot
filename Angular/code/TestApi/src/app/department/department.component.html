@@ -1,1 +1,32 @@
-<p>department works!</p>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of departmentData">
+            <td>{{row.id}}</td>
+            <td>{{row.name}}</td>
+        </tr>
+    </tbody>
+
+</table>
+
+<form [formGroup]="formValue">
+    <div class="mb-3">
+        <label  class="form-label">First Name</label>
+        <input type="text" class="form-control" formControlName="name" >                        
+    </div>
+    
+   
+</form>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-success" (click)="saveDep()">Save</button>
+    <!-- <button type="button" class="btn btn-primary" (click)=" employeeEdit()">Update</button> -->
+</div>
+

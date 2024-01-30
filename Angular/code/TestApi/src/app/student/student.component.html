@@ -1,1 +1,28 @@
-<p>student works!</p>
+<div>
+    <h2>Students List</h2>
+  
+    <ul>
+      <li *ngFor="let student of students">
+        {{ student.name }} - {{ student.email }} --{{ student.department?.name }}
+      </li>
+    </ul>
+  </div>
+  
+  <div>
+    <h2>Create Students</h2>
+  
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name">
+  
+      <label for="email">Email:</label>
+      <input type="text" id="email" formControlName="email">      
+  
+      <label for="department">Department:</label>
+      <select id="department" formControlName="department">
+        <option *ngFor="let dept of departments" [value]="dept.name">{{dept.name }}</option>
+      </select>
+  
+      <button type="submit" [disabled]="studentForm.invalid">Create Student</button>
+    </form>
+  </div>

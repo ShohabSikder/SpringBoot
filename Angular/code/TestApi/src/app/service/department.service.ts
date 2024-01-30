@@ -7,7 +7,7 @@ import { map } from 'rxjs';
 })
 export class DepartmentService {
 
-  baseUrl:string="http://localhost:8082/api/department";
+  baseUrl:string="http://localhost:8086/api/department";
 
   constructor(private http:HttpClient) { }
 

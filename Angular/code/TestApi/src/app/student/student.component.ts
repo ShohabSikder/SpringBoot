@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../model/student.model';
-import { Department } from '../model/departmen.model';
+import { Department } from '../model/department.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../service/student.service';
 import { DepartmentService } from '../service/department.service';
