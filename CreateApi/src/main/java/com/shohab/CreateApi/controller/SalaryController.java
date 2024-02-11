@@ -3,6 +3,7 @@ package com.shohab.CreateApi.controller;
 
 import com.shohab.CreateApi.model.Advance;
 import com.shohab.CreateApi.model.Employee;
+import com.shohab.CreateApi.model.Salary;
 import com.shohab.CreateApi.repository.AdvanceRepository;
 import com.shohab.CreateApi.repository.EmployeeRepository;
 import com.shohab.CreateApi.services.SalaryService;
@@ -30,21 +31,19 @@ public class SalaryController {
 
 
     @PostMapping("/saveEmployee")
-    public ResponseEntity<String> saveEmployee(@RequestParam String name, @RequestParam java.sql.Date joiningDate) {
-        // Create and save the Employee
-        Employee employee = new Employee();
-        employee.setName(name);
-        employee.setJoiningDate(joiningDate);
+    public ResponseEntity<String> saveEmployee(@RequestBody Employee employee) {
         employeeRepository.save(employee);
-
         return ResponseEntity.ok("Employee saved successfully.");
     }
 
 
     @PostMapping("/saveAdvance")
-    public ResponseEntity<String> saveAdvance(@RequestParam Long employeeId, @RequestParam BigDecimal amount) {
-        // Fetch the employee from the repository based on the provided ID
-        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+    public ResponseEntity<String> saveAdvance(@RequestBody Advance request) {
+        String employeeName = request.getEmployee().getName();
+        BigDecimal amount = request.getAmount();
+
+        // Fetch the employee from the repository based on the provided name
+        Optional<Employee> optionalEmployee = employeeRepository.findByName(employeeName);
         if (optionalEmployee.isEmpty()) {
             return ResponseEntity.badRequest().body("Employee not found");
         }
@@ -59,10 +58,11 @@ public class SalaryController {
         return ResponseEntity.ok("Advance saved successfully.");
     }
 
+
     @PostMapping("/pay")
-    public ResponseEntity<String> paySalary(@RequestParam Long employeeId, @RequestParam BigDecimal amount) {
+    public ResponseEntity<String> paySalary(@RequestBody Salary salaryPayment) {
         // Fetch the employee from the repository based on the provided ID
-        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+        Optional<Employee> optionalEmployee = employeeRepository.findById(salaryPayment.getId());
         if (optionalEmployee.isEmpty()) {
             return ResponseEntity.badRequest().body("Employee not found");
         }
@@ -81,5 +81,6 @@ public class SalaryController {
 
 
 
-    
+
+
 }
