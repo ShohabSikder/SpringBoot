@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-3">
+        </div>
+        <div class="card col-6" style="background-color: rgb(188, 236, 255)">
+            <h3 class="text-center" style=" margin-top: 20px">Add Account Type</h3>
+            <form (ngSubmit)="accountTypeAdd()">
+               <input type="text" class="form-control" name="type_name" placeholder="Write an Account Type"
+                    [(ngModel)]="at.type_name"/>
+                <div class="col-1 p-3">
+                    <button class="btn btn-info">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3">
+        </div>
+    </div>
+</div>

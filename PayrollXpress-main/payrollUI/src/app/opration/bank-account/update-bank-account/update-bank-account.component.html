@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row" style="margin-top: 50px">
+    <div class="col-1">
+    </div>
+    <div class="card col-10" style="background-color: rgb(188, 236, 255)">
+      <h3 class="text-center" style=" margin-top: 20px">Update Account</h3>
+      <form (ngSubmit)="updateBankAccount()"  #addacc="ngForm">
+        <input type="text" name="id"
+               ngModel hidden><br>
+        <input type="text" class="form-control" name="account_name" placeholder="Account name"
+               ngModel /><br>
+        <label>Select Account Type: </label>
+        <select class="col-4 " class="form-control" name="accountTypeId" ngModel>
+          <option *ngFor="let atl of accountTypeList | async" value="{{atl.id}}">
+            {{atl.type_name}}</option>
+        </select><br>
+        <input type="text" class="form-control" name="account_number" placeholder="Account Number"
+               ngModel><br>
+        <input type="text" class="form-control" name="current_balance" placeholder="Current Balance"
+               ngModel/><br>
+        <textarea type="text" class="form-control" name="bank_and_branch_name" placeholder="Bank & Branch Name"
+                  ngModel></textarea><br>
+        <div class="col-1 p-3">
+          <button class="btn btn-info">Update</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-1">
+    </div>
+  </div>
+</div>
+

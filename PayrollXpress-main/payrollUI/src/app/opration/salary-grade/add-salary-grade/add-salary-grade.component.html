@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-2">
+        </div>
+        <div class="card col-8" style="background-color: rgb(188, 236, 255)">
+            <h1 class="text-center" style=" margin-top: 20px">Update Salary Grade- 6</h1>
+            <form (ngSubmit)="salaryGradeAdd()">
+                <input type="text" class="form-control" name="grade_name" placeholder="Write a salary grade" [(ngModel)]="sg.id" disabled>
+              <input type="text" class="form-control" name="basic_salary" placeholder="Basic Salary"
+                     [(ngModel)]="sg.basic_salary">
+                <div class="col-1 p-3">
+                    <button class="btn btn-info">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>

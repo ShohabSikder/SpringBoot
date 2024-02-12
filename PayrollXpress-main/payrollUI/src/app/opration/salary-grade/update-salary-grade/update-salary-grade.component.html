@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-2">
+        </div>
+        <div class="card col-8" style="background-color: rgb(188, 236, 255)">
+            <h3 class="text-center" style=" margin-top: 20px">Update Salary Grade</h3>
+            <form (ngSubmit)="salaryGradeUpdate()">
+                <div class="row p-3">
+                    <input type="text" class="form-control" name="grade_name"
+                        [(ngModel)]="sg.grade_name"/><br><br>
+                        <input type="text" class="form-control" name="basic_salary"
+                        [(ngModel)]="sg.basic_salary"/><br><br>
+                        <input type="text" class="form-control" name="house_rent"
+                        [(ngModel)]="sg.house_rent"/><br><br>
+                        <input type="text" class="form-control" name="medical_allowance"
+                        [(ngModel)]="sg.medical_allowance"/><br><br>
+                </div>
+                <div class="p-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary me-md-2">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>

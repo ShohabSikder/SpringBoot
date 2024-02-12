@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row" style="margin-top: 50px">
+    <div class="col-1">
+    </div>
+    <div class="card col-10" style="background-color: rgb(188, 236, 255)">
+      <div style="margin-top: 20px">
+        <button class="btn btn-dark" routerLink="/addaccount">Add New Account</button>
+      </div>
+      <h3 class="text-center">Bank Accounts</h3>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Account Number</th>
+          <th>Account Name</th>
+          <th>Account Type</th>
+          <th>Current Balance</th>
+          <th>Bank & Branch Name</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let al of accountList | async">
+          <td>#{{al.id}}</td>
+          <td>{{al.account_number}}</td>
+          <td>{{al.account_name}}</td>
+          <td>{{al.accountType.type_name}}</td>
+          <td>{{al.current_balance}}</td>
+          <td>{{al.bank_and_branch_name}}</td>
+          <td>
+            <button class="btn btn-outline-info" (click)="updateAccount(al.id)">Edit</button>
+            <button class="btn btn-outline-dark" (click)="deleteAccount(al.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-1">
+    </div>
+  </div>
+</div>
+

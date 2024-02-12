@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-4">
+        </div>
+        <div class="card col-4" style="background-color: rgb(188, 236, 255)">
+          <div style="margin-top: 20px">
+            <button class="btn btn-dark" routerLink="/addaccounttype">Add New Type</button>
+          </div>
+            <h3 class="text-center">Account Types</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let at of accountTypeList | async">
+                        <td>{{at.type_name}}</td>
+
+                        <td>
+                            <button class="btn btn-outline-info" (click)="updateAccountType(at.id)">Edit</button>
+                            <button class="btn btn-outline-dark" (click)="deleteAccountType(at.id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>

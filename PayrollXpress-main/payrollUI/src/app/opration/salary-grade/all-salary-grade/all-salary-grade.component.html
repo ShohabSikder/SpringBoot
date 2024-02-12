@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-2">
+        </div>
+        <div class="card col-8" style="background-color: rgb(188, 236, 255)">
+          <div style="margin-top: 20px">
+            <button class="btn btn-dark" (click)="isSalaryGreateExit()">Update Salary Grade</button>
+          </div>
+            <h3 class="text-center">Salary Grades</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Basic Salary</th>
+                        <th>House Rent</th>
+                        <th>Medical Allowance</th>
+                        <th>Total Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sg of salaryGradeList | async">
+                        <td>{{sg.grade_name}}</td>
+                        <td>{{sg.basic_salary}}</td>
+                        <td>{{sg.house_rent}}</td>
+                        <td>{{sg.medical_allowance}}</td>
+                        <td>{{sg.total_salary}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>
+

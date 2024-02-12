@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row" style="margin-top: 50px">
+    <div class="col-1">
+    </div>
+    <div class="card col-10" style="background-color: rgb(188, 236, 255)">
+      <h3 class="text-center" style=" margin-top: 20px">Add New Employee</h3>
+      <form (ngSubmit)="employeeAdd()"  #addemp="ngForm">
+        <input type="text" class="form-control" name="name" placeholder="Employee Name"
+               ngModel required /><br>
+
+        <label>Select Salary Grade: </label>
+        <select class="col-4 " class="form-control" name="salaryGrade" ngModel>
+          <option *ngFor="let sgl of salaryGradeList | async" value="{{sgl.id}}">
+            {{sgl.grade_name}}</option>
+        </select><br>
+
+        <input type="text" class="form-control" name="address" placeholder="Address"
+               ngModel /><br>
+        <input type="text" class="form-control" name="mobile" placeholder="Mobile"
+               ngModel /><br>
+
+        <label>Select Bank Account: </label>
+        <select class="col-4 " class="form-control" name="bankAccountId" ngModel>
+          <option *ngFor="let sgl of bankAccountList | async" value="{{sgl.id}}">
+            {{sgl.account_name}}</option>
+        </select><br>
+
+        <div class="col-1 p-3">
+          <button class="btn btn-info">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-1">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row" style="margin-top: 50px">
+
+    <div class="card col-12" style="background-color: rgb(188, 236, 255)">
+      <div style="margin-top: 20px">
+        <button class="btn btn-dark" routerLink="/addemployee">Add New Employee</button>
+      </div>
+      <h3 class="text-center">Employees</h3>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Salary Grade</th>
+          <th>Basic Salary</th>
+          <th>House Rent</th>
+          <th>Medical Allowance</th>
+          <th>Total Salary</th>
+          <th>Address</th>
+          <th>Mobile</th>
+          <th>Bank AC No</th>
+          <th>Account Type</th>
+          <th>Account Name</th>
+          <!-- <th>Current Balance</th> -->
+          <th>Bank & Branch Name</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let e of empList">
+          <td>#{{e.id}}</td>
+          <td>{{e.name}}</td>
+          <td>{{e.salaryGrade.grade_name}}</td>
+          <td>{{e.salaryGrade.basic_salary}}</td>
+          <td>{{e.salaryGrade.house_rent}}</td>
+          <td>{{e.salaryGrade.medical_allowance}}</td>
+          <td>{{e.salaryGrade.total_salary}}</td>
+          <td>{{e.address}}</td>
+          <td>{{e.mobile}}</td>
+          <td>{{e.bankAccount.account_number}}</td>
+          <td>{{e.bankAccount.accountType.type_name}}</td>
+          <td>{{e.bankAccount.account_name}}</td>
+          <!-- <td>{{e.bankAccount.current_balance}}</td> -->
+          <td>{{e.bankAccount.bank_and_branch_name}}</td>
+          <td>
+            <button class="btn btn-outline-info" (click)="updateEmployee(e.id)">Edit</button>
+            <button class="btn btn-outline-dark" (click)="deleteEmployee(e.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
