@@ -2,8 +2,10 @@ package com.shohab.CreateApi.services;
 
 
 import com.shohab.CreateApi.model.Advance;
+import com.shohab.CreateApi.model.Bonus;
 import com.shohab.CreateApi.model.Employee;
 import com.shohab.CreateApi.repository.AdvanceRepository;
+import com.shohab.CreateApi.repository.BonusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,25 @@ public class SalaryService {
     @Autowired
     private  AdvanceRepository advanceRepository;
 
+    @Autowired
+    private BonusRepository bonusRepository;
+
+    //This method works for showing who have taken advance
     public boolean hasTakenAdvance(Employee employee) {
         // Assuming advanceRepository.findByEmployee(employee) returns a List<Advance>
         List<Advance> advances = advanceRepository.findByEmployee(employee);
         return !advances.isEmpty(); // Return true if advances list is not empty
     }
+
+    //This method works for showing who have gotten bonus
+    public boolean hasTakenBonus(Employee employee) {
+        // Assuming bonusRepository.findByEmployee(employee) returns a List<Bonus>
+        List<Bonus> bonuses = bonusRepository.findByEmployee(employee);
+        return !bonuses.isEmpty(); // Return true if bonuses list is not empty
+    }
+
+
+    //This method shows how much advance amount has taken
     public BigDecimal getAdvanceAmount(Employee employee) {
         // Assuming there's a method in your AdvanceRepository to find advances by employee
         List<Advance> advances = advanceRepository.findByEmployee(employee);
@@ -32,6 +48,19 @@ public class SalaryService {
         }
         return totalAdvanceAmount;
     }
+
+    //This method shows how much bonus amount will be gotten
+    public BigDecimal getBonusAmount(Employee employee) {
+        // Assuming there's a method in your BonusRepository to find bonuses by employee
+        List<Bonus> bonuses = bonusRepository.findByEmployee(employee);
+        BigDecimal totalBonusAmount = BigDecimal.ZERO; // Initialize total bonus amount to zero
+
+        for (Bonus bonus : bonuses) {
+            totalBonusAmount = totalBonusAmount.add(bonus.getAmount());
+        }
+        return totalBonusAmount;
+    }
+
 
 
 

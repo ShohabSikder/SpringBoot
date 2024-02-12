@@ -2,9 +2,11 @@ package com.shohab.CreateApi.controller;
 
 
 import com.shohab.CreateApi.model.Advance;
+import com.shohab.CreateApi.model.Bonus;
 import com.shohab.CreateApi.model.Employee;
 import com.shohab.CreateApi.model.Salary;
 import com.shohab.CreateApi.repository.AdvanceRepository;
+import com.shohab.CreateApi.repository.BonusRepository;
 import com.shohab.CreateApi.repository.EmployeeRepository;
 import com.shohab.CreateApi.repository.SalaryRepository;
 import com.shohab.CreateApi.services.SalaryService;
@@ -33,6 +35,9 @@ public class SalaryController {
 
     @Autowired
     public SalaryRepository salaryRepository;
+
+    @Autowired
+    public BonusRepository bonusRepository;
 
 
 
@@ -136,6 +141,41 @@ public class SalaryController {
         return ResponseEntity.ok("Advance saved successfully.");
     }
 
+    //Save Bonus
+    @PostMapping("/saveBonus")
+    public ResponseEntity<String> saveBonus(@RequestBody Bonus request) {
+        String employeeName = request.getEmployee().getName();
+        BigDecimal amount = request.getAmount();
+        Long employeeId = request.getEmployee().getId(); // New parameter for specifying employee ID
+
+        // Fetch the employee by ID
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+        if (optionalEmployee.isEmpty()) {
+            return ResponseEntity.badRequest().body("Employee not found");
+        }
+        Employee employee = optionalEmployee.get();
+
+        // Check if the employee name matches the provided name
+        if (!employee.getName().equals(employeeName)) {
+            return ResponseEntity.badRequest().body("Employee name does not match the provided ID");
+        }
+
+        // Create and save the Bonus for the Employee
+        Bonus bonus = new Bonus();
+        bonus.setEmployee(employee);
+        bonus.setAmount(amount);
+        bonusRepository.save(bonus);
+
+        return ResponseEntity.ok("Bonus saved successfully.");
+    }
+    //All bonus List
+    @GetMapping("/getAllBonus")
+    public ResponseEntity<List<Bonus>> getAllBonus() {
+        List<Bonus> advances = bonusRepository.findAll();
+        return ResponseEntity.ok(advances);
+    }
+
+
 
 
     @GetMapping("/getAllAdvance")
@@ -147,19 +187,58 @@ public class SalaryController {
 
 
 
+//    @PostMapping("/pay")
+//    public ResponseEntity<String> paySalary(@RequestBody Salary salaryPayment) {
+//        // Fetch the employee from the repository based on the provided ID
+//        List<Employee> optionalEmployee = employeeRepository.findByName(salaryPayment.getEmployee().getName());
+//        if (optionalEmployee.isEmpty()) {
+//            return ResponseEntity.badRequest().body("Employee not found");
+//        }
+//        Employee employee = optionalEmployee.get(0);
+//
+//        // Check if the employee has taken an advance
+//        if (salaryService.hasTakenAdvance(employee)) {
+//            BigDecimal advanceAmount = salaryService.getAdvanceAmount(employee);
+//            return ResponseEntity.badRequest().body("Employee has taken an advance."+advanceAmount);
+//        }
+//
+//        // Process salary payment
+//        // Your code to pay salary goes here
+//
+//        return ResponseEntity.ok("Salary paid successfully.");
+//    }
+
     @PostMapping("/pay")
     public ResponseEntity<String> paySalary(@RequestBody Salary salaryPayment) {
-        // Fetch the employee from the repository based on the provided ID
-        List<Employee> optionalEmployee = employeeRepository.findByName(salaryPayment.getEmployee().getName());
+        String employeeName = salaryPayment.getEmployee().getName();
+//        BigDecimal salaryAmount = salaryPayment.getAmount();
+        Long employeeId = salaryPayment.getEmployee().getId(); // New parameter for specifying employee ID
+
+        // Fetch the employee by ID
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isEmpty()) {
             return ResponseEntity.badRequest().body("Employee not found");
         }
-        Employee employee = optionalEmployee.get(0);
+        Employee employee = optionalEmployee.get();
+
+        // Check if the employee name matches the provided name
+        if (!employee.getName().equals(employeeName)) {
+            return ResponseEntity.badRequest().body("Employee name does not match the provided ID");
+        }
 
         // Check if the employee has taken an advance
         if (salaryService.hasTakenAdvance(employee)) {
             BigDecimal advanceAmount = salaryService.getAdvanceAmount(employee);
-            return ResponseEntity.badRequest().body("Employee has taken an advance."+advanceAmount);
+            // Check if the employee has also taken a bonus
+            if (salaryService.hasTakenBonus(employee)) {
+                BigDecimal bonusAmount = salaryService.getBonusAmount(employee);
+                return ResponseEntity.badRequest().body("Employee has taken both an advance and a bonus. Advance amount: " + advanceAmount + ", Bonus amount: " + bonusAmount);
+            } else {
+                return ResponseEntity.badRequest().body("Employee has taken an advance. Advance amount: " + advanceAmount);
+            }
+        } else if (salaryService.hasTakenBonus(employee)) {
+            BigDecimal bonusAmount = salaryService.getBonusAmount(employee);
+            return ResponseEntity.badRequest().body("Employee has taken a bonus. Bonus amount: " + bonusAmount);
         }
 
         // Process salary payment
@@ -167,6 +246,7 @@ public class SalaryController {
 
         return ResponseEntity.ok("Salary paid successfully.");
     }
+
 
     @GetMapping("/getAllSalaries")
     public ResponseEntity<List<Salary>> getAllSalaries() {
