@@ -29,7 +29,7 @@ CREATE TABLE `advance` (
   PRIMARY KEY (`id`),
   KEY `FKh62etjlrdxk656bate70uf86d` (`employee_id`),
   CONSTRAINT `FKh62etjlrdxk656bate70uf86d` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `advance` (
 
 LOCK TABLES `advance` WRITE;
 /*!40000 ALTER TABLE `advance` DISABLE KEYS */;
-INSERT INTO `advance` VALUES (1,1000.00,2),(2,2000.00,1);
+INSERT INTO `advance` VALUES (1,1000.00,2),(2,2000.00,1),(3,2000.00,3);
 /*!40000 ALTER TABLE `advance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +77,7 @@ CREATE TABLE `employee` (
   `joining_date` date DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'2024-02-11','Shoaib'),(2,'2024-02-11','John Doe');
+INSERT INTO `employee` VALUES (1,'2024-02-11','Shoaib'),(2,'2024-02-11','John Doe'),(3,'2024-02-11','Rahim'),(4,'2024-02-11','Rahim');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `salary` (
   PRIMARY KEY (`id`),
   KEY `FKnlnv3jbyvbiu8ci59r3btlk00` (`employee_id`),
   CONSTRAINT `FKnlnv3jbyvbiu8ci59r3btlk00` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,6 +114,7 @@ CREATE TABLE `salary` (
 
 LOCK TABLES `salary` WRITE;
 /*!40000 ALTER TABLE `salary` DISABLE KEYS */;
+INSERT INTO `salary` VALUES (1,5000.00,'2024-02-10',1);
 /*!40000 ALTER TABLE `salary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-11 13:33:35
+-- Dump completed on 2024-02-12 14:39:53
