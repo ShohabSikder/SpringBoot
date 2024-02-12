@@ -6,13 +6,16 @@ import com.shohab.CreateApi.model.Employee;
 import com.shohab.CreateApi.model.Salary;
 import com.shohab.CreateApi.repository.AdvanceRepository;
 import com.shohab.CreateApi.repository.EmployeeRepository;
+import com.shohab.CreateApi.repository.SalaryRepository;
 import com.shohab.CreateApi.services.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/salaries")
@@ -28,6 +31,9 @@ public class SalaryController {
     @Autowired
     private SalaryService salaryService;
 
+    @Autowired
+    public SalaryRepository salaryRepository;
+
 
 
     @PostMapping("/saveEmployee")
@@ -36,18 +42,90 @@ public class SalaryController {
         return ResponseEntity.ok("Employee saved successfully.");
     }
 
+    @GetMapping("/getAllEmployees")
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        return ResponseEntity.ok(employees);
+    }
+
+
+
+//    @PostMapping("/saveAdvance")
+//    public ResponseEntity<String> saveAdvance(@RequestBody Advance request) {
+//        String employeeName = request.getEmployee().getName();
+//        BigDecimal amount = request.getAmount();
+//
+//        // Fetch the employee from the repository based on the provided name
+//        Optional<Employee> optionalEmployee = employeeRepository.findByName(employeeName);
+//        if (optionalEmployee.isEmpty()) {
+//            return ResponseEntity.badRequest().body("Employee not found");
+//        }
+//        Employee employee = optionalEmployee.get();
+//
+//        // Create and save the Advance for the Employee
+//        Advance advance = new Advance();
+//        advance.setEmployee(employee);
+//        advance.setAmount(amount);
+//        advanceRepository.save(advance);
+//
+//        return ResponseEntity.ok("Advance saved successfully.");
+//    }
+
+//    @PostMapping("/saveAdvance")
+//    public ResponseEntity<String> saveAdvance(@RequestBody Advance request) {
+//        String employeeName = request.getEmployee().getName();
+//        BigDecimal amount = request.getAmount();
+//        Long employeeId = request.getEmployee().getId();
+//
+//        // Fetch all employees with the provided name
+//        List<Employee> employees = employeeRepository.findByName(employeeName);
+//
+//        // Check if no employee found or multiple employees found with the same name
+//        if (employees.isEmpty()) {
+//            return ResponseEntity.badRequest().body("Employee not found");
+//        }
+////        else if (employees.size() > 1) {
+////            return ResponseEntity.badRequest().body("Multiple employees found with the same name");
+////        }
+//        else if (employees.size() > 1) {
+//            // Retrieve names of the multiple employees
+//            List<String> employeeNames = employees.stream()
+//                    .map(Employee::getName)
+//                    .collect(Collectors.toList());
+//            String errorMessage = "Multiple employees found with the same name: " + String.join(", ", employeeNames);
+//            return ResponseEntity.badRequest().body(errorMessage);
+//        }
+//
+//        // Retrieve the first (and only) employee with the provided name
+//        Employee employee = employees.get(0);
+//
+//        // Create and save the Advance for the Employee
+//        Advance advance = new Advance();
+//        advance.setEmployee(employee);
+//        advance.setAmount(amount);
+//        advanceRepository.save(advance);
+//
+//        return ResponseEntity.ok("Advance saved successfully.");
+//    }
+
 
     @PostMapping("/saveAdvance")
     public ResponseEntity<String> saveAdvance(@RequestBody Advance request) {
         String employeeName = request.getEmployee().getName();
         BigDecimal amount = request.getAmount();
+        Long employeeId = request.getEmployee().getId(); // New parameter for specifying employee ID
 
-        // Fetch the employee from the repository based on the provided name
-        Optional<Employee> optionalEmployee = employeeRepository.findByName(employeeName);
+        // Fetch the employee by ID
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
         if (optionalEmployee.isEmpty()) {
             return ResponseEntity.badRequest().body("Employee not found");
         }
         Employee employee = optionalEmployee.get();
+
+        // Check if the employee name matches the provided name
+        if (!employee.getName().equals(employeeName)) {
+            return ResponseEntity.badRequest().body("Employee name does not match the provided ID");
+        }
 
         // Create and save the Advance for the Employee
         Advance advance = new Advance();
@@ -59,18 +137,29 @@ public class SalaryController {
     }
 
 
+
+    @GetMapping("/getAllAdvance")
+    public ResponseEntity<List<Advance>> getAllAdvance() {
+        List<Advance> advances = advanceRepository.findAll();
+        return ResponseEntity.ok(advances);
+    }
+
+
+
+
     @PostMapping("/pay")
     public ResponseEntity<String> paySalary(@RequestBody Salary salaryPayment) {
         // Fetch the employee from the repository based on the provided ID
-        Optional<Employee> optionalEmployee = employeeRepository.findById(salaryPayment.getId());
+        List<Employee> optionalEmployee = employeeRepository.findByName(salaryPayment.getEmployee().getName());
         if (optionalEmployee.isEmpty()) {
             return ResponseEntity.badRequest().body("Employee not found");
         }
-        Employee employee = optionalEmployee.get();
+        Employee employee = optionalEmployee.get(0);
 
         // Check if the employee has taken an advance
         if (salaryService.hasTakenAdvance(employee)) {
-            return ResponseEntity.badRequest().body("Employee has taken an advance.");
+            BigDecimal advanceAmount = salaryService.getAdvanceAmount(employee);
+            return ResponseEntity.badRequest().body("Employee has taken an advance."+advanceAmount);
         }
 
         // Process salary payment
@@ -78,6 +167,13 @@ public class SalaryController {
 
         return ResponseEntity.ok("Salary paid successfully.");
     }
+
+    @GetMapping("/getAllSalaries")
+    public ResponseEntity<List<Salary>> getAllSalaries() {
+        List<Salary> salaries = salaryRepository.findAll();
+        return ResponseEntity.ok(salaries);
+    }
+
 
 
 
