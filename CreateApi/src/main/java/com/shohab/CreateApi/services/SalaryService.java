@@ -6,6 +6,7 @@ import com.shohab.CreateApi.model.Bonus;
 import com.shohab.CreateApi.model.Employee;
 import com.shohab.CreateApi.repository.AdvanceRepository;
 import com.shohab.CreateApi.repository.BonusRepository;
+import com.shohab.CreateApi.repository.SalaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import java.util.Optional;
 
 @Service
 public class SalaryService {
+    @Autowired
+    private SalaryRepository salaryRepository;
 
     @Autowired
     private  AdvanceRepository advanceRepository;
