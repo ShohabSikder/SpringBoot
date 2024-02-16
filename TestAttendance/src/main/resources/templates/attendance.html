@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance</title>
+</head>
+<body>
+<h2>Attendance Check</h2>
+<form action="#" th:action="@{/checkAttendance}" th:object="${attendance}" method="post">
+    <label for="checkIn">Check In:</label>
+    <input type="datetime-local" id="checkIn" name="checkIn" required>
+
+    <label for="checkOut">Check Out:</label>
+    <input type="datetime-local" id="checkOut" name="checkOut" required>
+
+    <label for="employee">Employee:</label>
+    <select id="employee" name="employee.id">
+        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
+    </select>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
