@@ -20,8 +20,11 @@
         <td th:text="${attendance.id}"></td>
         <td th:text="${attendance.checkIn}"></td>
         <td th:text="${attendance.checkOut}"></td>
-<!--        <td th:text="${attendance.employee.id}"></td>-->
-        <td th:text="${attendance.employee.name}"></td>
+        <td th:text="${attendance.employee?.name}"></td>
+<!--        <td th:text="${attendance.employee?.name ?: 'N/A'}"></td>-->
+
+
+        <!--        <td th:text="${attendance.employee.id}"></td>-->
 <!--        <td th:text="${attendance.employee.name}"></td>-->
     </tr>
     </tbody>
