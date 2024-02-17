@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -19,6 +20,11 @@ public class EmployeeService {
 
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
+    }
+
+    public Employee getEmployeeById(Long id) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        return optionalEmployee.orElse(null); // Return the employee if found, otherwise return null
     }
 
     // Other methods for CRUD operations or business logic related to employees

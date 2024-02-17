@@ -1,3 +1,28 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Attendance</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Attendance Check</h2>-->
+<!--<form action="#" th:action="@{/checkAttendance}" th:object="${attendance}" method="post">-->
+<!--    <label for="checkIn">Check In:</label>-->
+<!--    <input type="datetime-local" id="checkIn" name="checkIn" required>-->
+
+<!--    <label for="checkOut">Check Out:</label>-->
+<!--    <input type="datetime-local" id="checkOut" name="checkOut" required>-->
+
+<!--    <label for="employee">Employee:</label>-->
+<!--    <select id="employee" name="employee.id">-->
+<!--        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>-->
+<!--    </select>-->
+
+<!--    <button type="submit">Submit</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -6,19 +31,37 @@
 </head>
 <body>
 <h2>Attendance Check</h2>
-<form action="#" th:action="@{/checkAttendance}" th:object="${attendance}" method="post">
+<form id="attendanceForm" th:action="@{/checkAttendance}" th:object="${attendance}" method="post">
     <label for="checkIn">Check In:</label>
-    <input type="datetime-local" id="checkIn" name="checkIn" required>
+    <input type="datetime-local" id="checkIn" name="checkIn" readonly required>
+    <button type="button" onclick="recordCheckIn()">Check In</button>
 
     <label for="checkOut">Check Out:</label>
-    <input type="datetime-local" id="checkOut" name="checkOut" required>
+    <input type="datetime-local" id="checkOut" name="checkOut" readonly required>
+    <button type="button" onclick="recordCheckOut()">Check Out</button>
 
-    <label for="employee">Employee:</label>
-    <select id="employee" name="employee.id">
-        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
-    </select>
+    <!-- Hidden input field to store employee ID -->
+<!--    <input type="hidden" id="employeeId" name="employee.id" th:value="${employee.id}">-->
+
+<!--    <p>Employee ID: <span th:text="${employee.id}"></span></p>-->
+<!--    <p>Employee Name: <span th:text="${employee.name}"></span></p>-->
 
     <button type="submit">Submit</button>
 </form>
+
+<script>
+    function recordCheckIn() {
+        var checkInField = document.getElementById("checkIn");
+        var now = new Date();
+        checkInField.value = now.toISOString().slice(0, 16);
+    }
+
+    function recordCheckOut() {
+        var checkOutField = document.getElementById("checkOut");
+        var now = new Date();
+        checkOutField.value = now.toISOString().slice(0, 16);
+    }
+</script>
 </body>
 </html>
+
