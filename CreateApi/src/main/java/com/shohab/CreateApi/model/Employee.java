@@ -9,7 +9,7 @@ import java.sql.Date;
 @Data // Generates getters, setters, toString, equals, and hashCode methods
 @NoArgsConstructor // Generates a no-argument constructor
 @Entity
-public class Employee {
+public class Employee  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

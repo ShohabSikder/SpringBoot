@@ -4,6 +4,7 @@ import com.shohab.CreateApi.model.Advance;
 import com.shohab.CreateApi.model.Employee;
 import com.shohab.CreateApi.repository.AdvanceRepository;
 import com.shohab.CreateApi.repository.EmployeeRepository;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class AdvanceRestController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @PostMapping("/saveAdvance")
+    @PostMapping("")
     public ResponseEntity<String> saveAdvance(@RequestBody Advance advance) {
         String employeeName = advance.getEmployee().getName();
         BigDecimal amount = advance.getAmount();
@@ -50,9 +51,31 @@ public class AdvanceRestController {
         return ResponseEntity.ok("Advance saved successfully.");
     }
 
-    @GetMapping("/getAllAdvance")
+    @GetMapping("")
     public ResponseEntity<List<Advance>> getAllAdvance() {
         List<Advance> advances = advanceRepository.findAll();
         return ResponseEntity.ok(advances);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Advance> updateAdvance(@PathVariable Long id, @RequestBody Advance updatedAdvance) {
+        Advance advance = advanceRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Advance not found with id: " + id));
+
+        advance.setAmount(updatedAdvance.getAmount());
+        // Set other fields as needed
+
+        Advance updated = advanceRepository.save(advance);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAdvance(@PathVariable Long id) {
+        Advance advance = advanceRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Advance not found with id: " + id));
+
+        advanceRepository.delete(advance);
+        return ResponseEntity.ok().build();
     }
 }

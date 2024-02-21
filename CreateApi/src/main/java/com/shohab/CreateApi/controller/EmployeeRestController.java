@@ -4,6 +4,7 @@ import com.shohab.CreateApi.model.Department;
 import com.shohab.CreateApi.model.Employee;
 import com.shohab.CreateApi.repository.EmployeeRepository;
 import com.shohab.CreateApi.repository.IDepartmentRepo;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class EmployeeRestController {
 //        return ResponseEntity.ok("Employee saved successfully.");
 //    }
 
-    @PostMapping("/saveEmployee")
+    @PostMapping("")
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee){
 
         String name=employee.getDepartment().getName();
@@ -39,9 +40,34 @@ public class EmployeeRestController {
         return ResponseEntity.ok(savedEmployee);
 
     }
-    @GetMapping("/getAllEmployees")
+    @GetMapping("")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
         return ResponseEntity.ok(employees);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
+
+        String name = updatedEmployee.getDepartment().getName();
+        Department department = iDepartmentRepo.findByName(name);
+
+        employee.setDepartment(department);
+        employee.setName(updatedEmployee.getName());
+        // Set other fields as needed
+
+        Employee updated = employeeRepository.save(employee);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
+
+        employeeRepository.delete(employee);
+        return ResponseEntity.ok().build();
     }
 }
