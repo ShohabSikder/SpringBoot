@@ -2,6 +2,7 @@ package com.shohab.TestAttendance.service;
 
 import com.shohab.TestAttendance.model.Attendance;
 import com.shohab.TestAttendance.repository.AttendanceRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,25 +19,23 @@ public class AttendanceService {
         return attendanceRepository.findAll();
     }
 
-    public Attendance saveAttendance(Attendance attendance) {
-        return attendanceRepository.save(attendance);
-    }
-    public void checkIn(Long employeeId, LocalDateTime checkInTime) {
+    public void checkIn(Long employeeId) {
         Attendance attendance = new Attendance();
         attendance.setId(employeeId);
-        attendance.setCheckIn(checkInTime);
+        attendance.setCheckIn(LocalDateTime.now());
         attendanceRepository.save(attendance);
     }
 
-    public void checkOut(Long employeeId, LocalDateTime checkOutTime) {
-        Attendance attendance = attendanceRepository.findById(employeeId).get();
+    public void checkOut(Long employeeId) {
+        Attendance attendance = attendanceRepository.findByEmployeeIdAndCheckOutIsNull(employeeId);
         if (attendance != null) {
-            attendance.setCheckOut(checkOutTime);
+            attendance.setCheckOut(LocalDateTime.now());
             attendanceRepository.save(attendance);
         } else {
-            // Handle error: no check-in recorded for this employee
             throw new IllegalStateException("No check-in recorded for employee with ID: " + employeeId);
         }
     }
-    // Other methods for CRUD operations or business logic related to attendance
-}
+    }
+
+
+

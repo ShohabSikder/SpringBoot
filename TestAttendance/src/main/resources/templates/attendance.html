@@ -1,137 +1,22 @@
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Attendance</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h2>Attendance Check</h2>-->
-<!--<form id="attendanceForm" method="post" th:action="@{/checkAttendance}" th:object="${attendance}">-->
-<!--    <label for="employee">Select Employee:</label>-->
-<!--    <select id="employee" name="employee.id">-->
-<!--        <option value="">Select an employee</option>-->
-<!--        <option th:each="employee : ${employees}" th:text="${employee.name}" th:value="${employee.id}"></option>-->
-<!--    </select>-->
-
-<!--    <br><br>-->
-
-<!--    <label for="checkIn">Check In:</label>-->
-<!--    <input id="checkIn" name="checkIn" readonly required type="datetime-local">-->
-<!--    <button onclick="recordCheckIn()" type="button">Check In</button>-->
-<!--    <br><br>-->
-
-<!--    <label for="checkOut">Check Out:</label>-->
-<!--    <input id="checkOut" name="checkOut" readonly required type="datetime-local">-->
-<!--    <button onclick="recordCheckOut()" type="button">Check Out</button>-->
-<!--    <br><br>-->
-
-<!--    <button type="submit">Submit</button>-->
-<!--</form>-->
-
-
-<!--<script>-->
-<!--    //this code is working-->
-
-
-<!--        function recordCheckIn() {-->
-<!--        var checkInField = document.getElementById("checkIn");-->
-<!--        var now = new Date();-->
-<!--        var formattedDateTime = now.getFullYear() + '-' +-->
-<!--        ('0' + (now.getMonth() + 1)).slice(-2) + '-' +-->
-<!--        ('0' + now.getDate()).slice(-2) + 'T' +-->
-<!--        ('0' + now.getHours()).slice(-2) + ':' +-->
-<!--        ('0' + now.getMinutes()).slice(-2);-->
-<!--        checkInField.value = formattedDateTime;-->
-<!--    }-->
-
-<!--        function recordCheckOut() {-->
-<!--        var checkOutField = document.getElementById("checkOut");-->
-<!--        var now = new Date();-->
-<!--        var formattedDateTime = now.getFullYear() + '-' +-->
-<!--        ('0' + (now.getMonth() + 1)).slice(-2) + '-' +-->
-<!--        ('0' + now.getDate()).slice(-2) + 'T' +-->
-<!--        ('0' + now.getHours()).slice(-2) + ':' +-->
-<!--        ('0' + now.getMinutes()).slice(-2);-->
-<!--        checkOutField.value = formattedDateTime;-->
-<!--    }-->
-
-
-<!--</script>-->
-
-<!--</body>-->
-<!--</html>-->
-
-
-
-
-
-<!--//This code is not working-->
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Attendance</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h2>Attendance Check</h2>-->
-<!--<form id="attendanceForm" method="post" action="#">-->
-<!--    <label for="employee">Select Employee:</label>-->
-<!--    <select id="employee" name="employee.id">-->
-<!--        <option value="">Select an employee</option>-->
-<!--        <option th:each="employee : ${employees}" th:text="${employee.name}" th:value="${employee.id}"></option>-->
-<!--    </select>-->
-
-<!--    <br><br>-->
-
-<!--    <label for="checkIn">Check In:</label>-->
-<!--    <input id="checkIn" name="checkIn" readonly required type="datetime-local">-->
-<!--    <button onclick="recordCheckIn()" type="button">Check In</button>-->
-<!--    <br><br>-->
-
-<!--    <label for="checkOut">Check Out:</label>-->
-<!--    <input id="checkOut" name="checkOut" readonly required type="datetime-local">-->
-<!--    <button onclick="recordCheckOut()" type="button">Check Out</button>-->
-<!--    <br><br>-->
-<!--</form>-->
-
-<!--<script>-->
-<!--    function recordCheckOut() {-->
-<!--        var employeeId = document.getElementById("employee").value;-->
-<!--        var checkOutField = document.getElementById("checkOut").value;-->
-
-<!--        // Send AJAX request to submit check-out data-->
-<!--        fetch("/checkOut?employeeId=" + employeeId, {-->
-<!--            method: "POST",-->
-<!--            headers: {-->
-<!--                "Content-Type": "application/json"-->
-<!--            },-->
-<!--            body: JSON.stringify({-->
-<!--                checkOut: checkOutField-->
-<!--            })-->
-<!--        }).then(response => {-->
-<!--            if (response.ok) {-->
-<!--                alert("Check-out recorded successfully.");-->
-<!--            } else {-->
-<!--                alert("Failed to record check-out.");-->
-<!--            }-->
-<!--        }).catch(error => {-->
-<!--            console.error("Error:", error);-->
-<!--            alert("Failed to record check-out.");-->
-<!--        });-->
-<!--    }-->
-
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Form</title>
+</head>
+<body>
+<h2>Attendance Form</h2>
+<form method="post" th:action="@{/attendance/checkInOrOut}">
+    <label for="employeeId">Employee ID:</label>
+    <input type="text" id="employeeId" name="employeeId" required>
+    <br>
+    <label for="action">Action:</label>
+    <select id="action" name="action" required>
+        <option value="checkIn">Check In</option>
+        <option value="checkOut">Check Out</option>
+    </select>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

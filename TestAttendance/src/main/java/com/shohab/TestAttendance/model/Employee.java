@@ -1,12 +1,11 @@
 package com.shohab.TestAttendance.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -18,4 +17,8 @@ public class Employee {
     private Long id;
 
     private String name;
+
+    // Define the relationship with Attendance entity
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private Set<Attendance> attendances;
 }

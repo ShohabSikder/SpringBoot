@@ -31,8 +31,8 @@ public class EmployeeRestController {
     @PostMapping("")
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee){
 
-        String name=employee.getDepartment().getName();
-        Department department = iDepartmentRepo.findByName(name);
+        String name=employee.getDepartment().getDeptName();
+        Department department = iDepartmentRepo.findBydName(name);
 
         employee.setDepartment(department);
 
@@ -51,8 +51,8 @@ public class EmployeeRestController {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
 
-        String name = updatedEmployee.getDepartment().getName();
-        Department department = iDepartmentRepo.findByName(name);
+        String name = updatedEmployee.getDepartment().getDeptName();
+        Department department = iDepartmentRepo.findBydName(name);
 
         employee.setDepartment(department);
         employee.setName(updatedEmployee.getName());

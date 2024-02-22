@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Attendance Records</title>
+</head>
+<body>
+<h2>All Attendance Records</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Employee ID</th>
+        <th>Check In Time</th>
+        <th>Check Out Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="attendance : ${attendances}">
+        <td th:text="${attendance.employeeId}"></td>
+        <td th:text="${attendance.checkIn}"></td>
+        <td th:text="${attendance.checkOut}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
