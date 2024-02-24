@@ -28,6 +28,8 @@ public class AdvanceRestController {
     public ResponseEntity<String> saveAdvance(@RequestBody Advance advance) {
         String employeeName = advance.getEmployee().getName();
         BigDecimal amount = advance.getAmount();
+        String reason=advance.getReason();
+        String date=advance.getDate();
         Long employeeId = advance.getEmployee().getId(); // New parameter for specifying employee ID
 
         // Fetch the employee by ID
@@ -46,6 +48,8 @@ public class AdvanceRestController {
         Advance advance_1 = new Advance();
         advance_1.setEmployee(employee);
         advance_1.setAmount(amount);
+        advance_1.setReason(reason);
+        advance_1.setDate(date);
         advanceRepository.save(advance_1);
 
         return ResponseEntity.ok("Advance saved successfully.");

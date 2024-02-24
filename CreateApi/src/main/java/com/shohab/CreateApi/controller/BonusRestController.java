@@ -1,6 +1,5 @@
 package com.shohab.CreateApi.controller;
 
-import com.shohab.CreateApi.model.Advance;
 import com.shohab.CreateApi.model.Bonus;
 import com.shohab.CreateApi.model.Employee;
 import com.shohab.CreateApi.repository.BonusRepository;
@@ -19,19 +18,53 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class BonusRestController {
     //Save Bonus
-   @Autowired
-   private BonusRepository bonusRepository;
-   @Autowired
-   private EmployeeRepository employeeRepository;
+    @Autowired
+    private BonusRepository bonusRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
 
+//    @PostMapping("")
+//    public ResponseEntity<String> saveBonus(@RequestBody Bonus request) {
+//        String employeeName = request.getEmployee().getName();
+//        BigDecimal amount = request.getAmount();
+//        String bonusDate=request.getBonusDate();
+//        Long employeeId = request.getEmployee().getId(); // New parameter for specifying employee ID
+//
+//        // Fetch the employee by ID
+//        Optional<Employee> optionalEmployee = employeeRepository.findByName(employeeName);
+//        if (optionalEmployee.isEmpty()) {
+//            return ResponseEntity.badRequest().body("Employee not found");
+//        }
+//        Employee employee = optionalEmployee.get();
+//
+//        // Check if the employee name matches the provided name
+//        if (!employee.getName().equals(employeeName)) {
+//            return ResponseEntity.badRequest().body("Employee name does not match the provided ID");
+//        }
+//
+//        // Create and save the Bonus for the Employee
+//        Bonus bonus = new Bonus();
+//        bonus.setEmployee(employee);
+//        bonus.setAmount(amount);
+//        bonus.setBonusDate(bonusDate);
+//        bonusRepository.save(bonus);
+//
+//        return ResponseEntity.ok("Bonus saved successfully.");
+//    }
 
 
     @PostMapping("")
     public ResponseEntity<String> saveBonus(@RequestBody Bonus request) {
+        // Null check for request.getEmployee()
+        if (request.getEmployee() == null) {
+            return ResponseEntity.badRequest().body("Employee information is missing");
+        }
+
         String employeeName = request.getEmployee().getName();
         BigDecimal amount = request.getAmount();
-        Long employeeId = request.getEmployee().getId(); // New parameter for specifying employee ID
+        String bonusDate = request.getBonusDate();
+//        Long employeeId = request.getEmployee().getId(); // Use employee ID for consistency
 
         // Fetch the employee by ID
         Optional<Employee> optionalEmployee = employeeRepository.findByName(employeeName);
@@ -49,10 +82,13 @@ public class BonusRestController {
         Bonus bonus = new Bonus();
         bonus.setEmployee(employee);
         bonus.setAmount(amount);
+        bonus.setBonusDate(bonusDate);
         bonusRepository.save(bonus);
 
-        return ResponseEntity.ok("Bonus saved successfully.");
+        // Return more detailed response
+        return ResponseEntity.ok("Bonus saved successfully. Bonus ID: " + bonus.getId());
     }
+
 
     //All bonus List
     @GetMapping("")

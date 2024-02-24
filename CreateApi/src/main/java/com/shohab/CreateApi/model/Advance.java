@@ -17,4 +17,6 @@ public class Advance {
     @ManyToOne
     private Employee employee;
     private BigDecimal amount;
+    private String reason;
+    private String date;
 }
